@@ -24,6 +24,7 @@
              (1+ (current-column))))))
 
 (global-set-key (kbd "M-+") 'toggle-selective-display)
+(global-set-key (kbd "C-x C-r") 'repeat)
 
 (add-hook 'c-mode-common-hook 'hs-minor-mode)
 (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
@@ -49,7 +50,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
-(global-linum-mode 1)
+;; (global-linum-mode 1)
 (setq inhibit-startup-message t)
 
 (load-theme 'deeper-blue t)
@@ -58,7 +59,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; global modes
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (column-number-mode 1)
 (subword-mode 1)
@@ -93,36 +94,44 @@
 ;; (add-hook 'lisp-mode-hook
 ;;           #'(lambda () (setq autopair-dont-activate t)))
 
-(require 'yasnippet-bundle)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/tie-snippets/")
+;; (require 'yasnippet-bundle)
+;; (yas/initialize)
+;; (yas/load-directory "~/.emacs.d/tie-snippets/")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; python modes
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'python-mode)
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 
 (require 'auto-complete)
-(global-auto-complete-mode t)
+(global-auto-complete-mode 0) ;; disabled since unknown error occured in all buffers
 
-(require 'flymake-cursor)
-(setq pycodechecker "pyflakes")
-(setq flymake-cursor-error-display-delay 0.25)
-(when (load "flymake" t)
-  (defun flymake-pycodecheck-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list pycodechecker (list local-file))))
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.py\\'" flymake-pycodecheck-init)))
-(add-hook 'find-file-hook 'flymake-find-file-hook)
-(defun flymake-xml-init ()
-  (list "xmllint" (list "val" (flymake-init-create-temp-buffer-copy 'flymake-create-temp-inplace))))
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(setq flycheck-display-errors-delay 0.25)
+(setq flycheck-gcc-include-path (quote ("/home/tie/repos/other/oxygine-framework/oxygine/src/"
+                                        "/home/tie/repos/mine/navigator/src")))
+(setq flycheck-gcc-definitions (quote ("LINUX" )))
+;; (setq flycheck-gcc-args (quote ("-x" "c++")))
+(setq flycheck-gcc-args (quote ("-std=c++11")))
+
+;; (require 'flymake-cursor)
+;; (setq pycodechecker "pyflakes")
+;; (setq flymake-cursor-error-display-delay 0.25)
+;; (when (load "flymake" t)
+;;   (defun flymake-pycodecheck-init ()
+;;     (let* ((temp-file (flymake-init-create-temp-buffer-copy
+;;                        'flymake-create-temp-inplace))
+;;            (local-file (file-relative-name
+;;                         temp-file
+;;                         (file-name-directory buffer-file-name))))
+;;       (list pycodechecker (list local-file))))
+;;   (add-to-list 'flymake-allowed-file-name-masks
+;;                '("\\.py\\'" flymake-pycodecheck-init)))
+;; (add-hook 'find-file-hook 'flymake-find-file-hook)
+;; (defun flymake-xml-init ()
+;;   (list "xmllint" (list "val" (flymake-init-create-temp-buffer-copy 'flymake-create-temp-inplace))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
