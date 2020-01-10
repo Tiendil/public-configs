@@ -1,3 +1,10 @@
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (let ((default-directory "~/.emacs.d/elpa/"))
   (normal-top-level-add-subdirs-to-load-path))
 
@@ -50,6 +57,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
+(global-eldoc-mode -1)
 ;; (global-linum-mode 1)
 (setq inhibit-startup-message t)
 
@@ -110,11 +118,12 @@
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (setq flycheck-display-errors-delay 0.25)
-(setq flycheck-gcc-include-path (quote ("/home/tie/repos/other/oxygine-framework/oxygine/src/"
-                                        "/home/tie/repos/mine/navigator/src")))
-(setq flycheck-gcc-definitions (quote ("LINUX" )))
-;; (setq flycheck-gcc-args (quote ("-x" "c++")))
-(setq flycheck-gcc-args (quote ("-std=c++11")))
+
+;; (use-package flycheck
+;;   :ensure t
+;;   :init (global-flycheck-mode))
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; (require 'flymake-cursor)
 ;; (setq pycodechecker "pyflakes")
@@ -149,3 +158,19 @@
 
 ;; (global-set-key [f11] 'toggle-fullscreen)
 ;; (run-with-idle-timer 0.1 nil 'toggle-fullscreen)
+
+(setq visible-bell 1)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (php-mode bbcode-mode yaml-mode python-mode protobuf-mode markdown-mode jinja2-mode highline highlight-parentheses flycheck-color-mode-line etags-select auto-complete))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
