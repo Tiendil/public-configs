@@ -126,6 +126,8 @@
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+(add-hook 'vue-mode-hook (lambda () (setq syntax-ppss-table nil)))
+
 ;; (require 'flymake-cursor)
 ;; (setq pycodechecker "pyflakes")
 ;; (setq flymake-cursor-error-display-delay 0.25)
