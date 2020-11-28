@@ -12,82 +12,78 @@
 
 (require 'package)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; additional repos
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (add-to-list 'package-archives '("elpa" . "http://tromey.com/elpa/"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; which-key mode
+;; use-package
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'which-key)
+(eval-when-compile (require 'use-package))
 
-(which-key-mode)
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; global config
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (global-set-key (kbd "C-g") 'goto-line)
 
-(setq-default indent-tabs-mode nil)
-
-(global-visual-line-mode 1)
-
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (global-eldoc-mode -1)
+
+(column-number-mode 1)
+(global-subword-mode 1)
+(delete-selection-mode 1)
+(global-visual-line-mode 1)
+
 (setq inhibit-startup-message t)
+(setq visible-bell 1)
+(setq indent-tabs-mode nil)
+(setq vc-follow-symlinks t)
 
 (load-theme 'deeper-blue t)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(setq visible-bell 1)
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 (split-window-horizontally)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; global modes
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; modes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(column-number-mode 1)
-(global-subword-mode 1)
-(delete-selection-mode 1)
+(use-package which-key
+  :config
+  (which-key-mode))
 
-(require 'julia-mode)
+(use-package julia-mode)
 
-(require 'highlight-parentheses)
-(define-globalized-minor-mode global-highlight-parentheses-mode
-  highlight-parentheses-mode
-  (lambda ()
-    (highlight-parentheses-mode t)))
-(global-highlight-parentheses-mode t)
+(use-package highlight-parentheses
+  :config
+  (global-highlight-parentheses-mode t))
 
-(require 'highline)
-(global-highline-mode t)
-(set-face-background 'highline-face "black")
+(use-package highline
+  :config
+  (global-highline-mode t)
+  (set-face-background 'highline-face "black"))
 
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
+(use-package uniquify
+  :ensure nil
+  :config
+  (setq uniquify-buffer-name-style 'forward))
 
-(require 'python-mode)
-(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(use-package python-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode)))
 
-(global-flycheck-mode)
-
-(add-hook 'vue-mode-hook (lambda () (setq syntax-ppss-table nil)))
-
-;; allow multiple major modes
-;; (add-hook 'mmm-mode-hook
-;;           (lambda ()
-;;             (set-face-background 'mmm-default-submode-face nil)))
+(use-package flycheck
+  :config
+  (global-flycheck-mode))
 
 
 (custom-set-variables
@@ -97,7 +93,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (which-key flycheck-julia julia-mode lsp-julia vue-mode php-mode bbcode-mode yaml-mode python-mode protobuf-mode markdown-mode jinja2-mode highline highlight-parentheses flycheck-color-mode-line etags-select auto-complete))))
+    (use-package which-key flycheck-julia julia-mode lsp-julia vue-mode php-mode bbcode-mode yaml-mode python-mode protobuf-mode markdown-mode jinja2-mode highline highlight-parentheses flycheck-color-mode-line etags-select auto-complete))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
