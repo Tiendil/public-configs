@@ -47,6 +47,12 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+(setq visible-bell 1)
+
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+
+(split-window-horizontally)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; global modes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -71,10 +77,6 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
-;;
-;; python modes
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (require 'python-mode)
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 
@@ -88,7 +90,6 @@
 ;;             (set-face-background 'mmm-default-submode-face nil)))
 
 
-(setq visible-bell 1)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
