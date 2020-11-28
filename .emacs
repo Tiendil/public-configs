@@ -21,32 +21,6 @@
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; hideshow mode
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; (require 'hideshow)
-
-;; (defun toggle-selective-display (column)
-;;       (interactive "P")
-;;       (set-selective-display
-;;        (or column
-;;            (unless selective-display
-;;              (1+ (current-column))))))
-
-;; (global-set-key (kbd "M-+") 'toggle-selective-display)
-;; (global-set-key (kbd "C-x C-r") 'repeat)
-
-;; (add-hook 'c-mode-common-hook 'hs-minor-mode)
-;; (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
-;; (add-hook 'java-mode-hook 'hs-minor-mode)
-;; (add-hook 'lisp-mode-hook 'hs-minor-mode)
-;; (add-hook 'perl-mode-hook 'hs-minor-mode)
-;; (add-hook 'python-mode-hook 'hs-minor-mode)
-;; (add-hook 'javascript-mode-hook 'hs-minor-mode)
-;; (add-hook 'html-mode-hook 'hs-minor-mode)
-;; (add-hook 'sh-mode-hook 'hs-minor-mode)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; which-key mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -58,8 +32,6 @@
 ;; global config
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (global-set-key (kbd "C-g") 'goto-line)
-
-;; (setq transient-mark-mode t)
 
 (setq-default indent-tabs-mode nil)
 
@@ -96,15 +68,6 @@
 (global-highline-mode t)
 (set-face-background 'highline-face "black")
 
-;; to update TAGS: find . -name "*.py" | etags --output TAGS -
-;; (require 'etags-select)
-;; (setq tags-revert-without-query t)
-;; (visit-tags-table "~/repos/TAGS")
-;; (global-set-key (kbd "M-.") 'etags-select-find-tag)
-
-;; (require 'imenu)
-;; (global-set-key (kbd "M-i") 'imenu)
-
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
@@ -115,18 +78,7 @@
 (require 'python-mode)
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 
-;; (require 'auto-complete)
-;; (global-auto-complete-mode 0) ;; disabled since unknown error occured in all buffers
-
 (global-flycheck-mode)
-;; (add-hook 'after-init-hook #'global-flycheck-mode)
-;; (setq flycheck-display-errors-delay 0.25)
-
-;; (use-package flycheck
-;;   :ensure t
-;;   :init (global-flycheck-mode))
-
-;; (add-hook 'after-init-hook #'global-flycheck-mode)
 
 (add-hook 'vue-mode-hook (lambda () (setq syntax-ppss-table nil)))
 
