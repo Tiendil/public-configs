@@ -180,6 +180,10 @@
   (setq yascroll:delay-to-hide nil)
   (global-yascroll-bar-mode))
 
+(use-package highlight-parentheses
+  :config
+  (highlight-parentheses-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; generated code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
