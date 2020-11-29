@@ -27,7 +27,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; global config
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-set-key (kbd "C-g") 'goto-line)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -47,10 +46,6 @@
 (load-theme 'deeper-blue t)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-
-(split-window-horizontally)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; modes
@@ -81,8 +76,11 @@
   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode)))
 
 (use-package flycheck
+  :init
+  (global-flycheck-mode)
   :config
-  (global-flycheck-mode))
+  (setq flycheck-highlighting-mode 'sexps)
+  (setq flycheck-python-pylint-executable "python3"))
 
 (use-package smartparens
   :config
@@ -116,15 +114,25 @@
   :bind (("\C-s" . 'swiper)
 	 ("C-c C-r" . 'ivy-resume)
 	 ("M-x" . 'counsel-M-x)
-	 ("C-x C-f" . 'counsel-find-file))
+	 ("C-x C-f" . 'counsel-find-file)
+	 ("C-x C-j" . 'counsel-file-jump))
   :config
   (ivy-mode 1)
   (setq ivy-height 30)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
 
+  (add-to-list 'completion-ignored-extensions "#")
+  (setq counsel-find-file-ignore-regexp (regexp-opt completion-ignored-extensions))
+
   (define-key ivy-minibuffer-map (kbd "C-j") #'ivy-immediate-done)
   (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done))
+
+(use-package prescient
+  :config
+  (setq prescient-history-length 5))
+
+(use-package ivy-prescient)
 
 (use-package dumb-jump
   :bind (("M-g o" . dumb-jump-go-other-window)
@@ -134,6 +142,15 @@
          ("M-g z" . dumb-jump-go-prefer-external-other-window))
   :config
   (setq dumb-jump-selector 'ivy))
+
+(use-package workgroups2
+  :config
+  (workgroups-mode 1))
+
+(use-package avy
+  :bind (("C-g" . 'avy-goto-line)
+	 ("C-'" . 'avy-goto-char-2)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; generated code
@@ -145,8 +162,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (smex amx avy helm counsel dumb-jump smartparens web-mode use-package which-key flycheck-julia julia-mode lsp-julia vue-mode php-mode bbcode-mode yaml-mode python-mode protobuf-mode markdown-mode jinja2-mode highline highlight-parentheses flycheck-color-mode-line etags-select auto-complete))))
+   '(workgroups2 smex amx avy helm counsel dumb-jump smartparens web-mode use-package which-key flycheck-julia julia-mode lsp-julia vue-mode php-mode bbcode-mode yaml-mode python-mode protobuf-mode markdown-mode jinja2-mode highline highlight-parentheses flycheck-color-mode-line etags-select auto-complete)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
