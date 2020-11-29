@@ -33,11 +33,6 @@
 (scroll-bar-mode -1)
 (global-eldoc-mode -1)
 
-(column-number-mode 1)
-(global-subword-mode 1)
-(delete-selection-mode 1)
-(global-visual-line-mode 1)
-
 (setq inhibit-startup-message t)
 (setq visible-bell 1)
 (setq indent-tabs-mode nil)
@@ -51,6 +46,18 @@
 ;; modes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(column-number-mode 1)
+(global-subword-mode 1)
+(delete-selection-mode 1)
+(global-visual-line-mode 1)
+
+(use-package hl-line
+  :ensure nil
+  :config
+  (global-hl-line-mode)
+  (set-face-background hl-line-face "black")
+  (setq global-hl-line-sticky-flag t))
+
 (use-package which-key
   :config
   (which-key-mode))
@@ -60,11 +67,6 @@
 (use-package highlight-parentheses
   :config
   (global-highlight-parentheses-mode t))
-
-(use-package highline
-  :config
-  (global-highline-mode t)
-  (set-face-background 'highline-face "black"))
 
 (use-package uniquify
   :ensure nil
@@ -158,7 +160,6 @@
   (setq undo-tree-visualizer-timestamps 1)
   (global-undo-tree-mode))
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; generated code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -169,7 +170,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(undo-tree workgroups2 smex amx avy helm counsel dumb-jump smartparens web-mode use-package which-key flycheck-julia julia-mode lsp-julia vue-mode php-mode bbcode-mode yaml-mode python-mode protobuf-mode markdown-mode jinja2-mode highline highlight-parentheses flycheck-color-mode-line etags-select auto-complete)))
+   '(solaire-mode focus pretty-mode rainbow-mode rainbow-delimiters highlight-symbol undo-tree workgroups2 smex amx avy helm counsel dumb-jump smartparens web-mode use-package which-key flycheck-julia julia-mode lsp-julia vue-mode php-mode bbcode-mode yaml-mode python-mode protobuf-mode markdown-mode jinja2-mode highline highlight-parentheses flycheck-color-mode-line etags-select auto-complete)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
