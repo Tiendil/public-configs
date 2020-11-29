@@ -42,6 +42,8 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; modes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -74,7 +76,9 @@
   (setq uniquify-buffer-name-style 'forward))
 
 (use-package python-mode
+  :defines python-shell-interpreter
   :config
+  (setq python-shell-interpreter "python3")
   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode)))
 
 (use-package flycheck
@@ -82,7 +86,7 @@
   (global-flycheck-mode)
   :config
   (setq flycheck-highlighting-mode 'sexps)
-  (setq flycheck-python-pylint-executable "python3"))
+  (setq flycheck-python-pylint-executable python-shell-interpreter))
 
 (use-package smartparens
   :config
@@ -190,6 +194,28 @@
 ;; 			'(:key "C-x C-c" :description "leave Emacs")
 ;; 			'(:key "C-x C-f" :description "find file")))
 
+;; (use-package minions
+;;   :config
+;;   (minions-mode 1))
+
+;; (use-package doom-modeline
+;;   :config
+;;   (setq doom-modeline-buffer-file-name-style 'buffer-name)
+;;   (setq doom-modeline-icon nil)
+;;   (setq doom-modeline-unicode-fallback nil)
+;;   (setq doom-modeline-minor-modes t)
+;;   (setq doom-modeline-enable-word-count 1)
+;;   (setq doom-modeline-continuous-word-count-modes '(markdown-mode))
+;;   (setq doom-modeline-buffer-encoding t)
+;;   (setq doom-modeline-checker-simple-format t)
+;;   (setq doom-modeline-number-limit 99)
+;;   (setq doom-modeline-vcs-max-length 12)
+
+;;   (setq doom-modeline-env-version t)
+;;   (setq doom-modeline-env-python-executable python-shell-interpreter)
+
+;;   :init (doom-modeline-mode 1))
+
 (use-package telephone-line
   :config
   (setq telephone-line-lhs
@@ -217,7 +243,7 @@
  '(custom-safe-themes
    '("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
  '(package-selected-packages
-   '(mode-icons minions rich-minority-mode ririch-minority ririch-minority-mode smart-mode-line powerline cheatsheet company yascroll color-identifiers-mode dimmer beacon solaire-mode focus pretty-mode rainbow-mode rainbow-delimiters highlight-symbol undo-tree workgroups2 smex amx avy helm counsel dumb-jump smartparens web-mode use-package which-key flycheck-julia julia-mode lsp-julia vue-mode php-mode bbcode-mode yaml-mode python-mode protobuf-mode markdown-mode jinja2-mode highline highlight-parentheses flycheck-color-mode-line etags-select auto-complete)))
+   '(doom-modeline mode-icons minions rich-minority-mode ririch-minority ririch-minority-mode smart-mode-line powerline cheatsheet company yascroll color-identifiers-mode dimmer beacon solaire-mode focus pretty-mode rainbow-mode rainbow-delimiters highlight-symbol undo-tree workgroups2 smex amx avy helm counsel dumb-jump smartparens web-mode use-package which-key flycheck-julia julia-mode lsp-julia vue-mode php-mode bbcode-mode yaml-mode python-mode protobuf-mode markdown-mode jinja2-mode highline highlight-parentheses flycheck-color-mode-line etags-select auto-complete)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
