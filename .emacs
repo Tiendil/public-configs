@@ -168,8 +168,12 @@
   (dimmer-mode t))
 
 (use-package color-identifiers-mode
+  :defines color-identifiers-coloring-method
   :config
-  (global-color-identifiers-mode))
+  (global-color-identifiers-mode)
+  (setq color-identifiers-coloring-method :hash)
+  (setq color-identifiers:min-color-saturation 0.0)
+  (setq color-identifiers:max-color-saturation 1.0))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
