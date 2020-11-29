@@ -184,6 +184,27 @@
   :config
   (highlight-parentheses-mode))
 
+;; (use-package cheatsheet
+;;   :config
+;;   (cheatsheet-add-group 'Common
+;; 			'(:key "C-x C-c" :description "leave Emacs")
+;; 			'(:key "C-x C-f" :description "find file")))
+
+(use-package telephone-line
+  :config
+  (setq telephone-line-lhs
+	'((evil   . (telephone-line-buffer-segment))
+          (accent . (telephone-line-airline-position-segment
+                     telephone-line-erc-modified-channels-segment
+                     telephone-line-process-segment))))
+  (setq telephone-line-rhs
+	'((accent   . (telephone-line-major-mode-segment
+		       telephone-line-vc-segment
+		       telephone-line-erc-modified-channels-segment
+                       telephone-line-process-segment))))
+  (telephone-line-mode t))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; generated code
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -193,8 +214,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
  '(package-selected-packages
-   '(yascroll color-identifiers-mode dimmer beacon solaire-mode focus pretty-mode rainbow-mode rainbow-delimiters highlight-symbol undo-tree workgroups2 smex amx avy helm counsel dumb-jump smartparens web-mode use-package which-key flycheck-julia julia-mode lsp-julia vue-mode php-mode bbcode-mode yaml-mode python-mode protobuf-mode markdown-mode jinja2-mode highline highlight-parentheses flycheck-color-mode-line etags-select auto-complete)))
+   '(mode-icons minions rich-minority-mode ririch-minority ririch-minority-mode smart-mode-line powerline cheatsheet company yascroll color-identifiers-mode dimmer beacon solaire-mode focus pretty-mode rainbow-mode rainbow-delimiters highlight-symbol undo-tree workgroups2 smex amx avy helm counsel dumb-jump smartparens web-mode use-package which-key flycheck-julia julia-mode lsp-julia vue-mode php-mode bbcode-mode yaml-mode python-mode protobuf-mode markdown-mode jinja2-mode highline highlight-parentheses flycheck-color-mode-line etags-select auto-complete)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
