@@ -60,11 +60,10 @@
   :defines
   doom-themes-enable-bold
   doom-themes-enable-italic
-  :config
-  ;; Global settings (defaults)
+  :init
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-
+  :config
   ;; (load-theme 'doom-one t)
   ;; (load-theme 'doom-vibrant t)
   ;; (load-theme 'doom-city-lights t)
@@ -73,8 +72,6 @@
   ;; (load-theme 'doom-peacock t)
 
   (load-theme 'doom-dracula t)
-
-  ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config))
 
 (use-package minions
@@ -82,7 +79,7 @@
   (minions-mode 1))
 
 (use-package doom-modeline
-  :config
+  :init
   (setq doom-modeline-buffer-file-name-style 'buffer-name
 	doom-modeline-icon nil
 	doom-modeline-unicode-fallback nil
@@ -97,13 +94,14 @@
 	doom-modeline-env-version t
 	doom-modeline-env-python-executable python-shell-interpreter)
 
-  :init
+  :config
   (doom-modeline-mode 1))
 
 (use-package hl-line
   :ensure nil
-  :config
+  :init
   (setq global-hl-line-sticky-flag t)
+  :config
   (set-face-background hl-line-face "black")
   (global-hl-line-mode))
 
@@ -113,27 +111,30 @@
 
 (use-package uniquify
   :ensure nil
-  :config
+  :init
   (setq uniquify-buffer-name-style 'forward))
 
 (use-package dimmer
+  :init
+  (setq dimmer-adjustment-mode :foreground
+	dimmer-fraction 0.3)
   :config
-  (setq dimmer-adjustment-mode :foreground)
-  (setq dimmer-fraction 0.3)
   (dimmer-configure-which-key)
   (dimmer-mode t))
 
 (use-package color-identifiers-mode
   :defines color-identifiers-coloring-method
+  :init
+  (setq color-identifiers-coloring-method :hash
+	color-identifiers:min-color-saturation 0.0
+	color-identifiers:max-color-saturation 1.0)
   :config
-  (global-color-identifiers-mode)
-  (setq color-identifiers-coloring-method :hash)
-  (setq color-identifiers:min-color-saturation 0.0)
-  (setq color-identifiers:max-color-saturation 1.0))
+  (global-color-identifiers-mode))
 
 (use-package yascroll
-  :config
+  :init
   (setq yascroll:delay-to-hide nil)
+  :config
   (global-yascroll-bar-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -149,41 +150,34 @@
 
 (use-package julia-mode)
 
-(use-package python-mode
-  :defines python-shell-interpreter
-  :config
-  (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode)))
-
 (use-package flycheck
   :init
-  (global-flycheck-mode)
+  (setq flycheck-highlighting-mode 'sexps
+	flycheck-python-pylint-executable python-shell-interpreter)
   :config
-  (setq flycheck-highlighting-mode 'sexps)
-  (setq flycheck-python-pylint-executable python-shell-interpreter))
+  (global-flycheck-mode))
 
 (use-package smartparens
-  :config
+  :init
   (require 'smartparens-config))
 
 (use-package web-mode
-  :config
+  :init
+  (setq web-mode-engines-alist '(("django" . "\\.html\\'"))
+	web-mode-markup-indent-offset 2
+	web-mode-css-indent-offset 2
+	web-mode-code-indent-offset 2
+	web-mode-style-padding 1
+	web-mode-script-padding 1
+	web-mode-block-padding 0)
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (setq web-mode-engines-alist
-        '(("django" . "\\.html\\'")))
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-style-padding 1)
-  (setq web-mode-script-padding 1)
-  (setq web-mode-block-padding 0)
-
+  :config
   ;; integration with smartparens-mode
   (setq web-mode-enable-auto-pairing nil)
   (defun sp-web-mode-is-code-context (id action context)
     (and (eq action 'insert)
 	 (not (or (get-text-property (point) 'part-side)
 		  (get-text-property (point) 'block-side)))))
-
   (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context)))
 
 (use-package ivy)
@@ -196,20 +190,19 @@
 	 ("M-x" . 'counsel-M-x)
 	 ("C-x C-f" . 'counsel-find-file)
 	 ("C-x C-j" . 'counsel-file-jump))
-  :config
-  (ivy-mode 1)
-  (setq ivy-height 30)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) ")
-
+  :init
+  (setq ivy-height 30
+	ivy-use-virtual-buffers t
+	ivy-count-format "(%d/%d) "
+	counsel-find-file-ignore-regexp (regexp-opt completion-ignored-extensions))
   (add-to-list 'completion-ignored-extensions "#")
-  (setq counsel-find-file-ignore-regexp (regexp-opt completion-ignored-extensions))
-
+  :config
   (define-key ivy-minibuffer-map (kbd "C-j") #'ivy-immediate-done)
-  (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done))
+  (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
+  (ivy-mode 1))
 
 (use-package prescient
-  :config
+  :init
   (setq prescient-history-length 5))
 
 (use-package ivy-prescient)
@@ -220,7 +213,7 @@
          ("M-g i" . dumb-jump-go-prompt)
          ("M-g x" . dumb-jump-go-prefer-external)
          ("M-g z" . dumb-jump-go-prefer-external-other-window))
-  :config
+  :init
   (setq dumb-jump-selector 'ivy))
 
 (use-package workgroups2
@@ -232,9 +225,10 @@
 	 ("C-'" . 'avy-goto-char-2)))
 
 (use-package undo-tree
+  :init
+  (setq undo-tree-visualizer-diff 1
+	undo-tree-visualizer-timestamps 1)
   :config
-  (setq undo-tree-visualizer-diff 1)
-  (setq undo-tree-visualizer-timestamps 1)
   (global-undo-tree-mode))
 
 (use-package cheatsheet
