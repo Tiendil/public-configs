@@ -1,4 +1,3 @@
-
 ;;; Code:
 
 ;; Added by Package.el.  This must come before configurations of
@@ -182,6 +181,7 @@
 (use-package ivy)
 
 (use-package swiper
+  :defines counsel-find-file-ignore-regexp
   :requires ivy
   :bind (("\C-s" . 'swiper)
 	 ("C-c C-r" . 'ivy-resume)
@@ -254,3 +254,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(provide '.emacs)
+;;; .emacs ends here
