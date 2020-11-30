@@ -235,9 +235,22 @@
   :config
   (global-undo-tree-mode))
 
+(use-package company
+  :bind (("C-c C-." . company-complete))
+  :init
+  (setq company-show-numbers 'left
+	company-idle-delay nil)
+  :config
+  (global-company-mode))
+
+(use-package command-log-mode
+  :bind (("C-c C-l" . clm/open-command-log-buffer)))
+
 (use-package cheatsheet
   :bind (("<f1>" . 'cheatsheet-show))
   :config
+  (cheatsheet-add-group '"Autocomplete"
+			'(:key "C-x C-." :description "display autocomplete list"))
   (cheatsheet-add-group '"Open files"
 			'(:key "C-x C-f" :description "open file with ivy completion")
 			'(:key "C-x C-j" :description "jump to file from current directory with counsel completion")
@@ -249,7 +262,8 @@
 			'(:key "M-g o" :description "jump to definition in other frame")
 			'(:key "M-g j" :description "jump to definition in current frame")
 			'(:key "M-g i" :description "write name and jump to it in current frame")
-			'(:key "M-g x" :description "try to jump to definition in other frame")))
+			'(:key "M-g x" :description "try to jump to definition in other frame"))
+  (cheatsheet-add-group '"Commands Log"
+			'(:key "C-x C-l" :description "open commands log buffer")))
 
 (provide '.emacs)
-;;; .emacs ends here
