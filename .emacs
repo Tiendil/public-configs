@@ -2,6 +2,10 @@
 
 ;;; Commentary:
 
+;; TODO: Configure spellchecing for English and Russian with respect to programming modes
+;; TODO: Configure autoformating on save?
+;; TODO: Does it possible to display flycheck erros in ivy buffer?
+
 ;;; Code:
 
 ;; Added by Package.el.  This must come before configurations of
@@ -153,6 +157,7 @@
 (use-package flycheck
   :init
   (setq flycheck-highlighting-mode 'sexps
+	flycheck-check-syntax-automatically '(mode-enabled save)
 	flycheck-python-pylint-executable python-shell-interpreter)
   :config
   (global-flycheck-mode))
