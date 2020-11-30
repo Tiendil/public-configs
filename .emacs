@@ -196,14 +196,13 @@
 	 ("C-x C-f" . 'counsel-find-file)
 	 ("C-x C-j" . 'counsel-file-jump))
   :init
+  (add-to-list 'completion-ignored-extensions "#")
+  (add-to-list 'completion-ignored-extensions ".cache")
   (setq ivy-height 30
 	ivy-use-virtual-buffers t
 	ivy-count-format "(%d/%d) "
 	counsel-find-file-ignore-regexp (regexp-opt completion-ignored-extensions))
-  (add-to-list 'completion-ignored-extensions "#")
   :config
-  (define-key ivy-minibuffer-map (kbd "C-j") #'ivy-immediate-done)
-  (define-key ivy-minibuffer-map (kbd "RET") #'ivy-alt-done)
   (ivy-mode 1))
 
 (use-package prescient
@@ -216,8 +215,7 @@
   :bind (("M-g o" . dumb-jump-go-other-window)
          ("M-g j" . dumb-jump-go)
          ("M-g i" . dumb-jump-go-prompt)
-         ("M-g x" . dumb-jump-go-prefer-external)
-         ("M-g z" . dumb-jump-go-prefer-external-other-window))
+         ("M-g x" . dumb-jump-go-prefer-external))
   :init
   (setq dumb-jump-selector 'ivy))
 
@@ -239,9 +237,18 @@
 (use-package cheatsheet
   :bind (("<f1>" . 'cheatsheet-show))
   :config
-  (cheatsheet-add-group 'Common
-			'(:key "C-x C-c" :description "leave Emacs")
-			'(:key "C-x C-f" :description "find file")))
+  (cheatsheet-add-group '"Open files"
+			'(:key "C-x C-f" :description "open file with ivy completion")
+			'(:key "C-x C-j" :description "jump to file from current directory with counsel completion")
+			'(:key "C-u C-x C-j" :description "jump to file from base directory counsel completion"))
+  (cheatsheet-add-group '"Go to"
+			'(:key "C-x C-g" :description "go to line")
+			'(:key "C-x '" :description "go to position"))
+  (cheatsheet-add-group '"Jump to deinition"
+			'(:key "M-g o" :description "jump to definition in other frame")
+			'(:key "M-g j" :description "jump to definition in current frame")
+			'(:key "M-g i" :description "write name and jump to it in current frame")
+			'(:key "M-g x" :description "try to jump to definition in other frame")))
 
 (provide '.emacs)
 ;;; .emacs ends here
