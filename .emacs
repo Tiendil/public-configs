@@ -28,30 +28,70 @@
 ;; global config
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(setq vc-follow-symlinks t)
+(setq visible-bell 1)
+
+(defvar python-shell-interpreter "python3")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; theme configs
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (global-eldoc-mode -1)
 
 (setq inhibit-startup-message t)
-(setq visible-bell 1)
 (setq indent-tabs-mode nil)
-(setq vc-follow-symlinks t)
-
-(load-theme 'deeper-blue t)
-
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; modes
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (column-number-mode 1)
-(global-subword-mode 1)
-(delete-selection-mode 1)
 (global-visual-line-mode 1)
+
+(use-package doom-themes
+  :defines
+  doom-themes-enable-bold
+  doom-themes-enable-italic
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+
+  ;; (load-theme 'doom-one t)
+  ;; (load-theme 'doom-vibrant t)
+  ;; (load-theme 'doom-city-lights t)
+  ;; (load-theme 'doom-tomorrow-night t)
+  ;; (load-theme 'doom-opera t)
+  ;; (load-theme 'doom-peacock t)
+
+  (load-theme 'doom-dracula t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config))
+
+(use-package minions
+  :config
+  (minions-mode 1))
+
+(use-package doom-modeline
+  :config
+  (setq doom-modeline-buffer-file-name-style 'buffer-name)
+  (setq doom-modeline-icon nil)
+  (setq doom-modeline-unicode-fallback nil)
+  (setq doom-modeline-minor-modes t)
+  (setq doom-modeline-enable-word-count 1)
+  (setq doom-modeline-continuous-word-count-modes '(markdown-mode))
+  (setq doom-modeline-buffer-encoding t)
+  (setq doom-modeline-checker-simple-format t)
+  (setq doom-modeline-number-limit 99)
+  (setq doom-modeline-vcs-max-length 12)
+
+  (setq doom-modeline-env-version t)
+  (setq doom-modeline-env-python-executable python-shell-interpreter)
+
+  :init (doom-modeline-mode 1))
 
 (use-package hl-line
   :ensure nil
@@ -59,12 +99,6 @@
   (global-hl-line-mode)
   (set-face-background hl-line-face "black")
   (setq global-hl-line-sticky-flag t))
-
-(use-package which-key
-  :config
-  (which-key-mode))
-
-(use-package julia-mode)
 
 (use-package highlight-parentheses
   :config
@@ -75,10 +109,42 @@
   :config
   (setq uniquify-buffer-name-style 'forward))
 
+(use-package dimmer
+  :config
+  (setq dimmer-adjustment-mode :foreground)
+  (setq dimmer-fraction 0.3)
+  (dimmer-configure-which-key)
+  (dimmer-mode t))
+
+(use-package color-identifiers-mode
+  :defines color-identifiers-coloring-method
+  :config
+  (global-color-identifiers-mode)
+  (setq color-identifiers-coloring-method :hash)
+  (setq color-identifiers:min-color-saturation 0.0)
+  (setq color-identifiers:max-color-saturation 1.0))
+
+(use-package yascroll
+  :config
+  (setq yascroll:delay-to-hide nil)
+  (global-yascroll-bar-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; modes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(global-subword-mode 1)
+(delete-selection-mode 1)
+
+(use-package which-key
+  :config
+  (which-key-mode))
+
+(use-package julia-mode)
+
 (use-package python-mode
   :defines python-shell-interpreter
   :config
-  (setq python-shell-interpreter "python3")
   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode)))
 
 (use-package flycheck
@@ -157,79 +223,17 @@
   :bind (("C-g" . 'avy-goto-line)
 	 ("C-'" . 'avy-goto-char-2)))
 
-
 (use-package undo-tree
   :config
   (setq undo-tree-visualizer-diff 1)
   (setq undo-tree-visualizer-timestamps 1)
   (global-undo-tree-mode))
 
-(use-package dimmer
-  :config
-  (setq dimmer-adjustment-mode :foreground)
-  (setq dimmer-fraction 0.1)
-  (dimmer-configure-which-key)
-  (dimmer-mode t))
-
-(use-package color-identifiers-mode
-  :defines color-identifiers-coloring-method
-  :config
-  (global-color-identifiers-mode)
-  (setq color-identifiers-coloring-method :hash)
-  (setq color-identifiers:min-color-saturation 0.0)
-  (setq color-identifiers:max-color-saturation 1.0))
-
-(use-package yascroll
-  :config
-  (setq yascroll:delay-to-hide nil)
-  (global-yascroll-bar-mode))
-
-(use-package highlight-parentheses
-  :config
-  (highlight-parentheses-mode))
-
 ;; (use-package cheatsheet
 ;;   :config
 ;;   (cheatsheet-add-group 'Common
 ;; 			'(:key "C-x C-c" :description "leave Emacs")
 ;; 			'(:key "C-x C-f" :description "find file")))
-
-;; (use-package minions
-;;   :config
-;;   (minions-mode 1))
-
-;; (use-package doom-modeline
-;;   :config
-;;   (setq doom-modeline-buffer-file-name-style 'buffer-name)
-;;   (setq doom-modeline-icon nil)
-;;   (setq doom-modeline-unicode-fallback nil)
-;;   (setq doom-modeline-minor-modes t)
-;;   (setq doom-modeline-enable-word-count 1)
-;;   (setq doom-modeline-continuous-word-count-modes '(markdown-mode))
-;;   (setq doom-modeline-buffer-encoding t)
-;;   (setq doom-modeline-checker-simple-format t)
-;;   (setq doom-modeline-number-limit 99)
-;;   (setq doom-modeline-vcs-max-length 12)
-
-;;   (setq doom-modeline-env-version t)
-;;   (setq doom-modeline-env-python-executable python-shell-interpreter)
-
-;;   :init (doom-modeline-mode 1))
-
-(use-package telephone-line
-  :config
-  (setq telephone-line-lhs
-	'((evil   . (telephone-line-buffer-segment))
-          (accent . (telephone-line-airline-position-segment
-                     telephone-line-erc-modified-channels-segment
-                     telephone-line-process-segment))))
-  (setq telephone-line-rhs
-	'((accent   . (telephone-line-major-mode-segment
-		       telephone-line-vc-segment
-		       telephone-line-erc-modified-channels-segment
-                       telephone-line-process-segment))))
-  (telephone-line-mode t))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; generated code
@@ -243,7 +247,7 @@
  '(custom-safe-themes
    '("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
  '(package-selected-packages
-   '(doom-modeline mode-icons minions rich-minority-mode ririch-minority ririch-minority-mode smart-mode-line powerline cheatsheet company yascroll color-identifiers-mode dimmer beacon solaire-mode focus pretty-mode rainbow-mode rainbow-delimiters highlight-symbol undo-tree workgroups2 smex amx avy helm counsel dumb-jump smartparens web-mode use-package which-key flycheck-julia julia-mode lsp-julia vue-mode php-mode bbcode-mode yaml-mode python-mode protobuf-mode markdown-mode jinja2-mode highline highlight-parentheses flycheck-color-mode-line etags-select auto-complete)))
+   '(doom-themes doom-modeline mode-icons minions rich-minority-mode ririch-minority ririch-minority-mode smart-mode-line powerline cheatsheet company yascroll color-identifiers-mode dimmer beacon solaire-mode focus pretty-mode rainbow-mode rainbow-delimiters highlight-symbol undo-tree workgroups2 smex amx avy helm counsel dumb-jump smartparens web-mode use-package which-key flycheck-julia julia-mode lsp-julia vue-mode php-mode bbcode-mode yaml-mode python-mode protobuf-mode markdown-mode jinja2-mode highline highlight-parentheses flycheck-color-mode-line etags-select auto-complete)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
