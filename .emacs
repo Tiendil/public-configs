@@ -201,7 +201,8 @@
   (setq ivy-height 30
 	ivy-use-virtual-buffers t
 	ivy-count-format "(%d/%d) "
-	counsel-find-file-ignore-regexp (regexp-opt completion-ignored-extensions))
+	counsel-find-file-ignore-regexp (regexp-opt completion-ignored-extensions)
+	ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
   :config
   (ivy-mode 1))
 
