@@ -29,6 +29,10 @@
 ;; use-package
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
 (eval-when-compile (require 'use-package))
 
 (require 'use-package-ensure)
@@ -74,8 +78,8 @@
   ;; (load-theme 'doom-tomorrow-night t)
   ;; (load-theme 'doom-opera t)
   ;; (load-theme 'doom-peacock t)
-
   (load-theme 'doom-dracula t)
+
   (doom-themes-visual-bell-config))
 
 (use-package minions
@@ -148,6 +152,11 @@
 (global-subword-mode 1)
 (delete-selection-mode 1)
 
+(use-package yaml-mode
+  ;; :mode ("\\.yaml\\'" "\\.yml\\'")
+  :custom-face
+  (font-lock-variable-name-face ((t (:foreground "violet")))))
+
 (use-package which-key
   :config
   (which-key-mode))
@@ -185,7 +194,7 @@
 		  (get-text-property (point) 'block-side)))))
   (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context)))
 
-(use-package ivy)
+(use-package counsel)
 
 (use-package swiper
   :defines counsel-find-file-ignore-regexp
