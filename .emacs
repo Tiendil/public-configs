@@ -1,3 +1,7 @@
+;;; package --- my emacs config
+
+;;; Commentary:
+
 ;;; Code:
 
 ;; Added by Package.el.  This must come before configurations of
@@ -6,13 +10,16 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-(let ((default-directory "~/.emacs.d/elpa/"))
-  (normal-top-level-add-subdirs-to-load-path))
+(setq package-archives
+      '(("GNU ELPA"     . "https://elpa.gnu.org/packages/")
+        ("MELPA Stable" . "https://stable.melpa.org/packages/")
+        ("MELPA"        . "https://melpa.org/packages/"))
+      package-archive-priorities
+      '(("MELPA Stable" . 10)
+        ("GNU ELPA"     . 5)
+        ("MELPA"        . 0)))
 
 (require 'package)
-
-(add-to-list 'package-archives '("elpa" . "http://tromey.com/elpa/"))
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; use-package
@@ -29,8 +36,8 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(setq vc-follow-symlinks t)
-(setq visible-bell 1)
+(setq vc-follow-symlinks t
+      visible-bell t)
 
 (defvar python-shell-interpreter "python3")
 
@@ -43,8 +50,8 @@
 (scroll-bar-mode -1)
 (global-eldoc-mode -1)
 
-(setq inhibit-startup-message t)
-(setq indent-tabs-mode nil)
+(setq inhibit-startup-message t
+      indent-tabs-mode nil)
 
 (column-number-mode 1)
 (global-visual-line-mode 1)
@@ -76,28 +83,29 @@
 
 (use-package doom-modeline
   :config
-  (setq doom-modeline-buffer-file-name-style 'buffer-name)
-  (setq doom-modeline-icon nil)
-  (setq doom-modeline-unicode-fallback nil)
-  (setq doom-modeline-minor-modes t)
-  (setq doom-modeline-enable-word-count 1)
-  (setq doom-modeline-continuous-word-count-modes '(markdown-mode))
-  (setq doom-modeline-buffer-encoding t)
-  (setq doom-modeline-checker-simple-format t)
-  (setq doom-modeline-number-limit 99)
-  (setq doom-modeline-vcs-max-length 12)
+  (setq doom-modeline-buffer-file-name-style 'buffer-name
+	doom-modeline-icon nil
+	doom-modeline-unicode-fallback nil
+	doom-modeline-minor-modes t
+	doom-modeline-enable-word-count 1
+	doom-modeline-continuous-word-count-modes '(markdown-mode)
+	doom-modeline-buffer-encoding t
+	doom-modeline-checker-simple-format t
+	doom-modeline-number-limit 99
+	doom-modeline-vcs-max-length 12
 
-  (setq doom-modeline-env-version t)
-  (setq doom-modeline-env-python-executable python-shell-interpreter)
+	doom-modeline-env-version t
+	doom-modeline-env-python-executable python-shell-interpreter)
 
-  :init (doom-modeline-mode 1))
+  :init
+  (doom-modeline-mode 1))
 
 (use-package hl-line
   :ensure nil
   :config
-  (global-hl-line-mode)
+  (setq global-hl-line-sticky-flag t)
   (set-face-background hl-line-face "black")
-  (setq global-hl-line-sticky-flag t))
+  (global-hl-line-mode))
 
 (use-package highlight-parentheses
   :config
@@ -229,11 +237,12 @@
   (setq undo-tree-visualizer-timestamps 1)
   (global-undo-tree-mode))
 
-;; (use-package cheatsheet
-;;   :config
-;;   (cheatsheet-add-group 'Common
-;; 			'(:key "C-x C-c" :description "leave Emacs")
-;; 			'(:key "C-x C-f" :description "find file")))
+(use-package cheatsheet
+  :bind (("<f1>" . 'cheatsheet-show))
+  :config
+  (cheatsheet-add-group 'Common
+			'(:key "C-x C-c" :description "leave Emacs")
+			'(:key "C-x C-f" :description "find file")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; generated code
