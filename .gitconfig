@@ -1,0 +1,32 @@
+[core]
+
+hooksPath = "~/.my-git/hooks"
+fsmonitor = "query-watchman"
+post-checkout = "post-checkout"
+compression = 5
+editor = "emacs"
+
+[column]
+
+ui = "auto"
+
+[commit]
+
+# TODO: gpgSign — sign commits
+# TODO: template
+
+[fetch]
+
+parallel = 0
+
+[user]
+
+name = "Aliaksei Yaletski (Tiendil)"
+email = "a.eletsky@gmail.com"
+useConfigOnly = "true"
+
+[gc]
+autoDetach = "false"
+
+[pull]
+rebase = "true"
