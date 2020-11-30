@@ -1,8 +1,7 @@
 [core]
 
-hooksPath = "~/.my-git/hooks"
-fsmonitor = "query-watchman"
-post-checkout = "post-checkout"
+fsmonitor = "$HOME/.my-git/hooks/fsmonitor-watchman"
+post-checkout = "$HOME/.my-git/hooks/post-checkout"
 compression = 5
 editor = "emacs"
 
