@@ -47,7 +47,7 @@
 (setq vc-follow-symlinks t
       visible-bell t)
 
-(defvar python-shell-interpreter "~/.my-utiliies-venv/bin/pylint")
+(defvar python-shell-interpreter "~/.my-utiliies-venv/bin/python")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; theme configs
