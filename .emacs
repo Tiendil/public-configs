@@ -47,7 +47,7 @@
 (setq vc-follow-symlinks t
       visible-bell t)
 
-(defvar python-shell-interpreter "~/.my-utiliies-venv/bin/python")
+(defvar python-shell-interpreter "~/soft/emacs-python/venv/bin/python")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; theme configs
