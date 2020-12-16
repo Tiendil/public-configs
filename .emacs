@@ -47,7 +47,9 @@
 (setq vc-follow-symlinks t
       visible-bell t)
 
-(defvar python-shell-interpreter "~/soft/emacs-python/venv/bin/python")
+(defvar python-binaries "~/soft/emacs-python/venv/bin/")
+(defvar python-interpreter (concat python-binaries "python"))
+(defvar python-pylint (concat python-binaries "pylint"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; theme configs
@@ -100,7 +102,7 @@
 	doom-modeline-vcs-max-length 12
 
 	doom-modeline-env-version t
-	doom-modeline-env-python-executable python-shell-interpreter)
+	doom-modeline-env-python-executable python-interpreter)
 
   :config
   (doom-modeline-mode 1))
@@ -167,7 +169,8 @@
   :init
   (setq flycheck-highlighting-mode 'sexps
 	flycheck-check-syntax-automatically '(mode-enabled save)
-	flycheck-python-pylint-executable python-shell-interpreter)
+	flycheck-pylint-use-symbolic-id nil
+	flycheck-python-pylint-executable python-pylint)
   :config
   (global-flycheck-mode))
 

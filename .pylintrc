@@ -1,4 +1,21 @@
 
 [MESSAGES CONTROL]
+# TODO: remove E0402 after https://github.com/flycheck/flycheck/issues/1758 will be fixed
 
-disable=E0602
+disable=E0602,E0402,C0114,C0115,C0116,W0622,R0903
+
+good-names=i,
+           j,
+           k,
+	   l,
+           _,
+	   id
+
+max-line-length=100
+
+max-module-lines=1000
+
+# check only text in comments
+spelling-dict=en_US
+
+notes=FIXME
