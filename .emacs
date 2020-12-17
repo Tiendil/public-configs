@@ -199,6 +199,13 @@
 
 (use-package counsel)
 
+
+(defun tiendil-file-jump-from-find ()
+  "Switch to `counsel-file-jump' from `counsel-find-file'."
+  (interactive)
+  (ivy-quit-and-run
+    (counsel-file-jump ivy-text ivy--directory)))
+
 ;; about swipe search optimization https://oremacs.com/2019/04/07/swiper-isearch/
 ;; TODO: replace counsel-grep with swiper-isearch when swiper begun work fast on huge files
 (use-package swiper
@@ -207,7 +214,9 @@
   :bind (("C-s" . 'counsel-grep)
 	 ("M-x" . 'counsel-M-x)
 	 ("C-x C-f" . 'counsel-find-file)
-	 ("C-x C-j" . 'counsel-file-jump))
+  	 ("C-x C-j" . 'counsel-file-jump)
+	 :map counsel-find-file-map
+	 ("`" . 'tiendil-file-jump-from-find))
   :init
   (add-to-list 'completion-ignored-extensions "#")
   (add-to-list 'completion-ignored-extensions ".cache")
@@ -216,8 +225,10 @@
 	ivy-count-format "(%d/%d) "
 	counsel-find-file-ignore-regexp (regexp-opt completion-ignored-extensions)
 	ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+
   :config
   (ivy-mode 1))
+
 
 (use-package prescient
   :init
@@ -266,8 +277,9 @@
 			'(:key "C-x C-." :description "display autocomplete list"))
   (cheatsheet-add-group '"Open files"
 			'(:key "C-x C-f" :description "open file with ivy completion")
-			'(:key "C-x C-j" :description "jump to file from current directory with counsel completion")
-			'(:key "C-u C-x C-j" :description "jump to file from base directory counsel completion"))
+			'(:key "` (from ivy)" :description "jump to file with recursive completion from current directory while opening file")
+			'(:key "C-x C-j" :description "open file with recursive completion from current directory"))
+
   (cheatsheet-add-group '"Go to"
 			'(:key "C-x C-g" :description "go to line")
 			'(:key "C-x '" :description "go to position"))
