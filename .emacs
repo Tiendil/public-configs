@@ -153,6 +153,7 @@
 
 (global-subword-mode 1)
 (delete-selection-mode 1)
+(winner-mode 1)
 
 (use-package yaml-mode
   ;; :mode ("\\.yaml\\'" "\\.yml\\'")
@@ -289,19 +290,10 @@
 			'(:key "M-g i" :description "write name and jump to it in current frame")
 			'(:key "M-g x" :description "try to jump to definition in other frame"))
   (cheatsheet-add-group '"Commands Log"
-			'(:key "C-x C-l" :description "open commands log buffer")))
+			'(:key "C-x C-l" :description "open commands log buffer"))
+  (cheatsheet-add-group '"Windows management"
+			'(:key "C-x left" :description "undor last window hierarhy changes")
+			'(:key "C-x right" :description "apply next window hierarhy changes")))
 
 (provide '.emacs)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(yascroll yaml-mode workgroups2 which-key web-mode vue-mode use-package undo-tree telephone-line sublimity solaire-mode smex smartparens smart-mode-line rainbow-mode rainbow-delimiters python-mode protobuf-mode pretty-mode powerline php-mode moody mode-icons minions lsp-ui lsp-julia lsp-ivy jinja2-mode ivy-rich ivy-prescient highline highlight-symbol highlight-parentheses helm-lsp guess-language focus flycheck-pos-tip flycheck-julia flycheck-inline flycheck-color-mode-line etags-select elpy dumb-jump doom-themes doom-modeline dimmer counsel command-log-mode color-identifiers-mode cheatsheet beacon bbcode-mode avy auto-complete amx all-the-icons-ivy)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(font-lock-variable-name-face ((t (:foreground "violet")))))
+;;; .emacs ends here
