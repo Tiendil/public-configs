@@ -157,6 +157,8 @@
 
 (desktop-save-mode)
 
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
+
 (use-package yaml-mode
   ;; :mode ("\\.yaml\\'" "\\.yml\\'")
   :custom-face
@@ -217,6 +219,9 @@
 ;;       but remember, that counsel-grep does not work with fileless buffers
 ;;       you should write a custom function to use swiper-isearch in such buffers
 ;; TODO: swiper-isearch breaks when first supplied character is '$'
+;; TODO: command to open all filtered files
+;;       see https://emacs.stackexchange.com/questions/38803/prelude-ivy-how-to-select-and-open-multiple-files
+;;       solution works for counsel-find-file, but does not work for counsel-jump-file
 (use-package swiper
   :defines counsel-find-file-ignore-regexp
   :requires ivy
@@ -295,6 +300,8 @@
   (cheatsheet-add-group '"Open files"
 			'(:key "C-x C-f" :description "open file with ivy completion")
 			'(:key "` (from ivy)" :description "jump to file with recursive completion from current directory while opening file")
+			'(:key "C-c a (from ivy)" :description "open all filtered files")
+
 			'(:key "C-x C-j" :description "open file with recursive completion from current directory"))
   (cheatsheet-add-group '"Go to"
 			'(:key "C-g" :description "go to line")
