@@ -237,11 +237,11 @@
 
 (use-package ivy-prescient)
 
+;; TODO: dumb-jump-back
 (use-package dumb-jump
   :bind (("M-g o" . dumb-jump-go-other-window)
          ("M-g j" . dumb-jump-go)
-         ("M-g i" . dumb-jump-go-prompt)
-         ("M-g x" . dumb-jump-go-prefer-external))
+         ("M-g i" . dumb-jump-go-prompt))
   :init
   (setq dumb-jump-selector 'ivy))
 
@@ -261,7 +261,12 @@
   (global-undo-tree-mode))
 
 (use-package company
-  :bind (("C-c C-." . company-complete))
+  :bind (("M-." . company-complete)
+	 :map company-active-map
+	 ("C-n" . 'company-select-next)
+	 ("C-e" . 'company-select-next)
+	 ("C-p" . 'company-select-previous)
+	 ("C-a" . 'company-select-previous))
   :init
   (setq company-show-numbers 'left
 	company-idle-delay nil)
@@ -275,15 +280,16 @@
   :bind (("<f1>" . 'cheatsheet-show))
   :config
   (cheatsheet-add-group '"Autocomplete"
-			'(:key "C-x C-." :description "display autocomplete list"))
+			'(:key "M-." :description "display autocomplete list")
+			'(:key "M-<0…9>" :description "choose suggestion"))
   (cheatsheet-add-group '"Open files"
 			'(:key "C-x C-f" :description "open file with ivy completion")
 			'(:key "` (from ivy)" :description "jump to file with recursive completion from current directory while opening file")
 			'(:key "C-x C-j" :description "open file with recursive completion from current directory"))
 
   (cheatsheet-add-group '"Go to"
-			'(:key "C-x C-g" :description "go to line")
-			'(:key "C-x '" :description "go to position"))
+			'(:key "C-g" :description "go to line")
+			'(:key "C-'" :description "go to position"))
   (cheatsheet-add-group '"Jump to deinition"
 			'(:key "M-g o" :description "jump to definition in other frame")
 			'(:key "M-g j" :description "jump to definition in current frame")
