@@ -214,6 +214,7 @@
 ;; TODO: choose counsel-grep instead of swiper-isearch if delays begin to annoy you
 ;;       but remember, that counsel-grep does not work with fileless buffers
 ;;       you should write a custom function to use swiper-isearch in such buffers
+;; TODO: swiper-isearch breaks when first supplied character is '$'
 (use-package swiper
   :defines counsel-find-file-ignore-regexp
   :requires ivy
@@ -221,6 +222,8 @@
 	 ("M-x" . 'counsel-M-x)
 	 ("C-x C-f" . 'counsel-find-file)
   	 ("C-x C-j" . 'counsel-file-jump)
+	 :map ivy-minibuffer-map
+	 ("C-m" . ivy-partial-or-done)
 	 :map counsel-find-file-map
 	 ("`" . 'tiendil-file-jump-from-find))
   :init
