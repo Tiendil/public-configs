@@ -229,9 +229,8 @@
 	 ("M-x" . 'counsel-M-x)
 	 ("C-x C-f" . 'counsel-find-file)
   	 ("C-x C-j" . 'counsel-file-jump)
-	 :map ivy-minibuffer-map
-	 ("C-m" . ivy-partial-or-done)
 	 :map counsel-find-file-map
+	 ("C-m" . ivy-partial-or-done)
 	 ("`" . 'tiendil-file-jump-from-find))
   :init
   (add-to-list 'completion-ignored-extensions "#")
@@ -315,7 +314,21 @@
 			'(:key "C-x C-l" :description "open commands log buffer"))
   (cheatsheet-add-group '"Windows management"
 			'(:key "C-x left" :description "undor last window hierarhy changes")
-			'(:key "C-x right" :description "apply next window hierarhy changes")))
+			'(:key "C-x right" :description "apply next window hierarhy changes")
+			'(:key "C-x +" :description "balance windows sizes")))
 
 (provide '.emacs)
 ;;; .emacs ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(yascroll yaml-mode workgroups2 which-key web-mode vue-mode volatile-highlights use-package undo-tree telephone-line sublimity solaire-mode smex smartparens smart-mode-line rainbow-mode rainbow-delimiters python-mode protobuf-mode pretty-mode powerline php-mode moody mode-icons minions lsp-ui lsp-julia lsp-ivy jinja2-mode ivy-rich ivy-prescient highline highlight-symbol highlight-parentheses helm-lsp guess-language focus flycheck-pos-tip flycheck-julia flycheck-inline flycheck-color-mode-line etags-select elpy dumb-jump doom-themes doom-modeline dimmer counsel command-log-mode color-identifiers-mode cheatsheet beacon bbcode-mode avy auto-complete amx all-the-icons-ivy)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(font-lock-variable-name-face ((t (:foreground "violet")))))
