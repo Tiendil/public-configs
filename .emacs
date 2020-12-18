@@ -206,6 +206,10 @@
   (ivy-quit-and-run
     (counsel-file-jump ivy-text ivy--directory)))
 
+(defun tiendil-prepare-file-search-regexp ()
+  "Prepare regexp for `counsel-find-file-ignore-regexp'."
+  (concat (regexp-opt completion-ignored-extensions) "$"))
+
 ;; about swiper search optimization https://oremacs.com/2019/04/07/swiper-isearch/
 ;; TODO: choose counsel-grep instead of swiper-isearch if delays begin to annoy you
 ;;       but remember, that counsel-grep does not work with fileless buffers
@@ -225,12 +229,12 @@
   (setq ivy-height 30
 	ivy-use-virtual-buffers t
 	ivy-count-format "(%d/%d) "
-	counsel-find-file-ignore-regexp (regexp-opt completion-ignored-extensions)
+	ivy-extra-directories nil
+	counsel-find-file-ignore-regexp (tiendil-prepare-file-search-regexp)
 	ivy-re-builders-alist '((t . ivy--regex-plus)))
 
   :config
   (ivy-mode 1))
-
 
 (use-package prescient
   :init
