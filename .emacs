@@ -239,9 +239,8 @@
 
 ;; TODO: dumb-jump-back
 (use-package dumb-jump
-  :bind (("M-g o" . dumb-jump-go-other-window)
-         ("M-g j" . dumb-jump-go)
-         ("M-g i" . dumb-jump-go-prompt))
+  :bind (("C-c o" . dumb-jump-go-other-window)
+         ("C-c j" . dumb-jump-go))
   :init
   (setq dumb-jump-selector 'ivy))
 
@@ -286,15 +285,12 @@
 			'(:key "C-x C-f" :description "open file with ivy completion")
 			'(:key "` (from ivy)" :description "jump to file with recursive completion from current directory while opening file")
 			'(:key "C-x C-j" :description "open file with recursive completion from current directory"))
-
   (cheatsheet-add-group '"Go to"
 			'(:key "C-g" :description "go to line")
 			'(:key "C-'" :description "go to position"))
-  (cheatsheet-add-group '"Jump to deinition"
-			'(:key "M-g o" :description "jump to definition in other frame")
-			'(:key "M-g j" :description "jump to definition in current frame")
-			'(:key "M-g i" :description "write name and jump to it in current frame")
-			'(:key "M-g x" :description "try to jump to definition in other frame"))
+  (cheatsheet-add-group '"Jump to definition"
+			'(:key "C-c o" :description "jump to definition in other frame")
+			'(:key "C-c j" :description "jump to definition in current frame"))
   (cheatsheet-add-group '"Commands Log"
 			'(:key "C-x C-l" :description "open commands log buffer"))
   (cheatsheet-add-group '"Windows management"
