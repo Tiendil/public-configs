@@ -155,6 +155,8 @@
 (delete-selection-mode 1)
 (winner-mode 1)
 
+(desktop-save-mode)
+
 (use-package yaml-mode
   ;; :mode ("\\.yaml\\'" "\\.yml\\'")
   :custom-face
@@ -251,10 +253,6 @@
          ("C-c j" . dumb-jump-go))
   :init
   (setq dumb-jump-selector 'ivy))
-
-(use-package workgroups2
-  :config
-  (workgroups-mode 1))
 
 (use-package avy
   :bind (("C-g" . 'avy-goto-line)
