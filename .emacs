@@ -253,11 +253,16 @@
 	 ("C-'" . 'avy-goto-char-2)))
 
 (use-package undo-tree
+  :bind (("C-c u" . undo-tree-visualize))
   :init
   (setq undo-tree-visualizer-diff 1
 	undo-tree-visualizer-timestamps 1)
   :config
   (global-undo-tree-mode))
+
+(use-package volatile-highlights
+  :config
+  (volatile-highlights-mode t))
 
 (use-package company
   :bind (("M-." . company-complete)
@@ -291,6 +296,8 @@
   (cheatsheet-add-group '"Jump to definition"
 			'(:key "C-c o" :description "jump to definition in other frame")
 			'(:key "C-c j" :description "jump to definition in current frame"))
+  (cheatsheet-add-group '"Undo tree"
+			'(:key "C-c u" :description "open undo tree3"))
   (cheatsheet-add-group '"Commands Log"
 			'(:key "C-x C-l" :description "open commands log buffer"))
   (cheatsheet-add-group '"Windows management"
