@@ -2,15 +2,20 @@
 [MESSAGES CONTROL]
 # TODO: remove E0402 after https://github.com/flycheck/flycheck/issues/1758 will be fixed
 # TODO: remove E0401 when it become possible to detemine imports from virtual enviroments
+# TODO: remove W0212 when pylint start to correctly determine allowed usage of private members
 
-disable=E0602,E0402,C0114,C0115,C0116,W0622,R0903,E0401,R0201
+disable=E0602,E0402,C0114,C0115,C0116,W0622,R0903,E0401,R0201,W0212
 
 good-names=i,
            j,
            k,
 	   l,
            _,
-	   id
+	   id,
+	   to,
+	   x,
+	   y,
+	   z
 
 max-line-length=100
 
