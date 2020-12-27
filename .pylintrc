@@ -1,10 +1,12 @@
 
 [MESSAGES CONTROL]
-# TODO: remove E0402 after https://github.com/flycheck/flycheck/issues/1758 will be fixed
-# TODO: remove E0401 when it become possible to detemine imports from virtual enviroments
-# TODO: remove W0212 when pylint start to correctly determine allowed usage of private members
+# TODO: remove E0402 after https://github.com/flycheck/flycheck/issues/1758 will be fixed.
+# TODO: remove E0401 when it become possible to detemine imports from virtual enviroments.
+# TODO: remove W0212 when pylint start to correctly determine allowed usage of private members.
+# TODO: remove E1136 after pylint implement support for typing metaclasses and start understant typing.Optional[X].
+# TODO: remove W0611 after pylint become understand usage of imported modules (only) in annotations.
 
-disable=E0602,E0402,C0114,C0115,C0116,W0622,R0903,E0401,R0201,W0212
+disable=E0602,E0402,C0114,C0115,C0116,W0622,R0903,E0401,R0201,W0212,E1136,W0611
 
 good-names=i,
            j,

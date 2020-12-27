@@ -51,7 +51,7 @@
 (defvar python-binaries "~/soft/emacs-python/venv/bin/")
 (defvar python-interpreter (concat python-binaries "python"))
 (defvar python-pylint (concat python-binaries "pylint"))
-(defvar python-pyflakes (concat python-binaries "pyflakes"))
+(defvar python-flake8 (concat python-binaries "flake8"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; theme configs
@@ -126,6 +126,8 @@
   :init
   (setq uniquify-buffer-name-style 'forward))
 
+;; TODO: dimmer works with bugs
+;;       it periodically permanently dim windows.
 (use-package dimmer
   :init
   (setq dimmer-adjustment-mode :foreground
@@ -178,7 +180,7 @@
 	flycheck-check-syntax-automatically '(mode-enabled save)
 	flycheck-pylint-use-symbolic-id nil
 	flycheck-python-pylint-executable python-pylint
-	flycheck-pyflakes-executable python-pyflakes)
+	flycheck-python-flake8-executable python-flake8)
   :config
   (global-flycheck-mode))
 
