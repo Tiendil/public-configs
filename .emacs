@@ -168,6 +168,9 @@
   :custom-face
   (font-lock-variable-name-face ((t (:foreground "violet")))))
 
+
+(use-package markdown-mode)
+
 (use-package which-key
   :config
   (which-key-mode))
@@ -337,7 +340,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(json-mode yascroll yaml-mode workgroups2 which-key web-mode vue-mode volatile-highlights use-package undo-tree telephone-line sublimity solaire-mode smex smartparens smart-mode-line rainbow-mode rainbow-delimiters python-mode protobuf-mode pretty-mode powerline php-mode moody mode-icons minions lsp-ui lsp-julia lsp-ivy jinja2-mode ivy-rich ivy-prescient highline highlight-symbol highlight-parentheses helm-lsp guess-language focus flycheck-pos-tip flycheck-julia flycheck-inline flycheck-color-mode-line etags-select elpy dumb-jump doom-themes doom-modeline dimmer counsel company-prescient command-log-mode color-identifiers-mode cheatsheet beacon bbcode-mode avy auto-dim-other-buffers auto-complete amx all-the-icons-ivy)))
+   '(markdown-mode json-mode yascroll yaml-mode workgroups2 which-key web-mode vue-mode volatile-highlights use-package undo-tree telephone-line sublimity solaire-mode smex smartparens smart-mode-line rainbow-mode rainbow-delimiters python-mode protobuf-mode pretty-mode powerline php-mode moody mode-icons minions lsp-ui lsp-julia lsp-ivy jinja2-mode ivy-rich ivy-prescient highline highlight-symbol highlight-parentheses helm-lsp guess-language focus flycheck-pos-tip flycheck-julia flycheck-inline flycheck-color-mode-line etags-select elpy dumb-jump doom-themes doom-modeline dimmer counsel company-prescient command-log-mode color-identifiers-mode cheatsheet beacon bbcode-mode avy auto-dim-other-buffers auto-complete amx all-the-icons-ivy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
