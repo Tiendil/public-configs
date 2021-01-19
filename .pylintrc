@@ -28,3 +28,5 @@ max-module-lines=1000
 spelling-dict=en_US
 
 notes=FIXME
+
+max-args = 10
