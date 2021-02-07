@@ -18,7 +18,8 @@ good-names=i,
 	   to,
 	   x,
 	   y,
-	   z
+	   z,
+	   on
 
 max-line-length=120
 
@@ -30,3 +31,5 @@ spelling-dict=en_US
 notes=FIXME
 
 max-args = 10
+
+spelling-ignore-words = noqa,tarantoga,pydantic,deserialize,str,enum,json,serializable,Feedly
