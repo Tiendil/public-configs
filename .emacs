@@ -169,7 +169,8 @@
   (font-lock-variable-name-face ((t (:foreground "violet")))))
 
 
-(use-package markdown-mode)
+(use-package markdown-mode
+  :bind (("C-c o" . 'markdown-follow-link-at-point)))
 
 (use-package which-key
   :config
@@ -321,8 +322,9 @@
   (cheatsheet-add-group '"Go to"
 			'(:key "C-g" :description "go to line")
 			'(:key "C-'" :description "go to position"))
-  (cheatsheet-add-group '"Jump to definition"
+  (cheatsheet-add-group '"Jump to"
 			'(:key "C-c o" :description "jump to definition in other frame")
+			'(:key "C-c o" :description "jump to link in markdown file")
 			'(:key "C-c j" :description "jump to definition in current frame"))
   (cheatsheet-add-group '"Undo tree"
 			'(:key "C-c u" :description "open undo tree3"))
