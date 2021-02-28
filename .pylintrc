@@ -19,7 +19,13 @@ good-names=i,
 	   x,
 	   y,
 	   z,
-	   on
+	   on,
+	   a,
+	   b,
+	   c,
+	   d
+	   e,,
+	   f
 
 max-line-length=120
 
@@ -32,4 +38,4 @@ notes=FIXME
 
 max-args = 10
 
-spelling-ignore-words = noqa,tarantoga,pydantic,deserialize,str,enum,json,serializable,Feedly
+spelling-ignore-words = noqa,tarantoga,pydantic,deserialize,str,enum,json,serializable,Feedly,pytest,async
