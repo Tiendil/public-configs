@@ -7,7 +7,8 @@
 # TODO: remove W0611 after pylint become understand usage of imported modules (only) in annotations.
 # TODO: remove E1120 after pylint stop confusing, when decorators change functions arguments specification
 #       see https://github.com/PyCQA/pylint/issues/259 for details
-disable=E0602,E0402,C0114,C0115,C0116,W0622,R0903,E0401,R0201,W0212,E1136,W0611,W0703,C0413,E1120
+# TODO: remove E0611 when pylint will determine current virtual environment and use it
+disable=E0602,E0402,C0114,C0115,C0116,W0622,R0903,E0401,R0201,W0212,E1136,W0611,W0703,C0413,E1120,E0611
 
 good-names=i,
            j,
@@ -23,8 +24,8 @@ good-names=i,
 	   a,
 	   b,
 	   c,
-	   d
-	   e,,
+	   d,
+	   e,
 	   f
 
 max-line-length=120
@@ -38,4 +39,4 @@ notes=FIXME
 
 max-args = 10
 
-spelling-ignore-words = noqa,tarantoga,pydantic,deserialize,str,enum,json,serializable,Feedly,pytest,async
+spelling-ignore-words = noqa,tarantoga,pydantic,deserialize,str,enum,json,serializable,Feedly,pytest,async,preprocess,mixin,precompile,sortedcontainers,url,guid,smth,config,idna,unparsing
