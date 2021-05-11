@@ -7,6 +7,8 @@
 ;; TODO: Does it possible to display flycheck erros in ivy buffer?
 ;; TODO: It will be good if color-identifiers-mode will highlight all names (especially attributes)
 
+;; examples: https://pages.sachachua.com/.emacs.d/Sacha.html#org1bcc938
+
 ;;; Code:
 
 ;; Added by Package.el.  This must come before configurations of
@@ -52,6 +54,10 @@
 (defvar python-interpreter (concat python-binaries "python"))
 (defvar python-pylint (concat python-binaries "pylint"))
 (defvar python-flake8 (concat python-binaries "flake8"))
+
+(prefer-coding-system 'utf-8)
+(set-charset-priority 'unicode)
+(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; theme configs
@@ -158,10 +164,32 @@
 (global-subword-mode 1)
 (delete-selection-mode 1)
 (winner-mode 1)
+(global-auto-revert-mode t)
 
 (desktop-save-mode)
 
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
+
+
+;; https://orgmode.org/worg/org-configs/org-customization-guide.html
+;; examples: http://eschulte.github.io/org-scraps/
+;;           http://doc.norang.ca/org-mode.html
+(use-package org
+  :mode (("\\.org$" . org-mode))
+  :defines (org-id-link-to-org-use-id
+	    org-export-coding-system)
+  :init
+  (setq org-directory "~/repos/mine/my-org-base"
+	org-startup-folded 'content
+	org-tags-column 0
+	org-return-follows-link t
+	org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id
+	org-export-coding-system 'utf-8
+	org-startup-indented t
+	org-modules '(org-id))
+  :bind (("C-c l" . 'org-store-link)
+	 ("C-c a" . 'org-agenda)
+	 ("C-c c" . 'org-capture)))
 
 (use-package devdocs)
 
