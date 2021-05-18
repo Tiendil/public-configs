@@ -181,12 +181,15 @@
   :init
   (setq org-directory "~/repos/mine/my-org-base"
 	org-startup-folded 'content
-	org-tags-column 0
-	org-return-follows-link t
+	org-tags-column 80
+	org-return-follows-link nil
 	org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id
 	org-export-coding-system 'utf-8
 	org-startup-indented t
-	org-modules '(org-id))
+	org-enforce-todo-dependencies t
+	org-modules '(org-id)
+	org-todo-keywords '((sequence "TODO" "WORKING" "DONE")
+			    (sequence "|" "CANCELED")))
   :bind (("C-c l" . 'org-store-link)
 	 ("C-c a" . 'org-agenda)
 	 ("C-c c" . 'org-capture)))
@@ -375,7 +378,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(devdocs graphviz-dot-mode yascroll yaml-mode workgroups2 which-key web-mode vue-mode volatile-highlights use-package undo-tree typescript-mode telephone-line sublimity solaire-mode smex smartparens smart-mode-line rainbow-mode rainbow-delimiters python-mode protobuf-mode pretty-mode powerline php-mode moody mode-icons minions lsp-ui lsp-julia lsp-ivy json-mode jinja2-mode ivy-rich ivy-prescient highline highlight-symbol highlight-parentheses helm-lsp guess-language focus flycheck-pos-tip flycheck-julia flycheck-inline flycheck-color-mode-line etags-select elpy dumb-jump doom-themes doom-modeline dimmer counsel company-prescient command-log-mode color-identifiers-mode cheatsheet beacon bbcode-mode avy auto-dim-other-buffers auto-complete amx all-the-icons-ivy)))
+   '(org-super-links devdocs graphviz-dot-mode yascroll yaml-mode workgroups2 which-key web-mode vue-mode volatile-highlights use-package undo-tree typescript-mode telephone-line sublimity solaire-mode smex smartparens smart-mode-line rainbow-mode rainbow-delimiters python-mode protobuf-mode pretty-mode powerline php-mode moody mode-icons minions lsp-ui lsp-julia lsp-ivy json-mode jinja2-mode ivy-rich ivy-prescient highline highlight-symbol highlight-parentheses helm-lsp guess-language focus flycheck-pos-tip flycheck-julia flycheck-inline flycheck-color-mode-line etags-select elpy dumb-jump doom-themes doom-modeline dimmer counsel company-prescient command-log-mode color-identifiers-mode cheatsheet beacon bbcode-mode avy auto-dim-other-buffers auto-complete amx all-the-icons-ivy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
