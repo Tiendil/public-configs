@@ -50,7 +50,7 @@
 (setq vc-follow-symlinks t
       visible-bell t)
 
-(defvar python-binaries "~/soft/emacs-python/venv/bin/")
+(defvar python-binaries "~/.local/opt/emacs-venv/bin/")
 (defvar python-interpreter (concat python-binaries "python"))
 (defvar python-pylint (concat python-binaries "pylint"))
 (defvar python-flake8 (concat python-binaries "flake8"))

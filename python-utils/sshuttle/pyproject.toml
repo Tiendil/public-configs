@@ -1,0 +1,9 @@
+[tool.poetry]
+name = "tiendil_sshuttle_utilities"
+version = "0.1"
+description = "Custom installation."
+authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+sshuttle = "^1.0"

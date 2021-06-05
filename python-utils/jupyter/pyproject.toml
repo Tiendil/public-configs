@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "tiendil_jupyter_utilities"
+version = "0.1"
+description = "Custom installation."
+authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+notebook = "^6.4"
+jupyter_server_mathjax = "^0.2"
+
+sympy = "^1.8"
