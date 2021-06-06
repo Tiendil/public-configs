@@ -11,3 +11,4 @@ notebook = "^6.4"
 jupyter_server_mathjax = "^0.2"
 
 sympy = "^1.8"
+matplotlib = "^3.4"
