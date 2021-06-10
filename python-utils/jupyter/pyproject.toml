@@ -9,6 +9,7 @@ python = "^3.9"
 
 notebook = "^6.4"
 jupyter_server_mathjax = "^0.2"
+ipywidgets = "^7.6"
 
 sympy = "^1.8"
 numpy = "^1.20"
