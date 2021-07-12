@@ -11,6 +11,9 @@
 
 ;;; Code:
 
+;; garbage collection threshold
+(setq gc-cons-threshold (* 128 1024 1024))
+
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -408,5 +411,11 @@
                customize-apropos-groups customize-apropos-options
                customize-changed-options customize-save-customized))
   (put sym 'disabled "do not support `customize'"))
+
+
+(message "*** Emacs loaded in %s with %d garbage collections."
+     (format "%.2f seconds"
+             (float-time
+              (time-subtract after-init-time before-init-time))) gcs-done)
 
 ;;; .emacs ends here
