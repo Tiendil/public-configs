@@ -73,6 +73,8 @@
 (scroll-bar-mode -1)
 (global-eldoc-mode -1)
 
+(fringe-mode 10)
+
 (setq inhibit-startup-message t
       indent-tabs-mode nil)
 
