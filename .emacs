@@ -275,6 +275,10 @@
 		  (get-text-property (point) 'block-side)))))
   (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context)))
 
+(use-package dockerfile-mode)
+
+(use-package docker-compose-mode)
+
 (use-package counsel)
 
 (defun tiendil-file-jump-from-find ()
