@@ -12,7 +12,8 @@ jupyter_server_mathjax = "^0.2"
 ipywidgets = "^7.6"
 
 # docker images as kernels
-dockernel = "^1"
+#dockernel = "^1"
+# dockernel = { path = "/home/tiendil/repos/mine/dockernel", develop = true }
 
 sympy = "^1.8"
 numpy = "^1.20"
