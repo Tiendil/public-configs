@@ -1,0 +1,10 @@
+[tool.poetry]
+name = "tiendil_tensorboard_utilities"
+version = "0.1"
+description = "Custom installation."
+authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+tensorflow = "^2.5"
