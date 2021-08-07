@@ -53,10 +53,14 @@
 (setq vc-follow-symlinks t
       visible-bell t)
 
-(defvar python-binaries "~/.local/opt/emacs-venv/bin/")
-(defvar python-interpreter (concat python-binaries "python"))
-(defvar python-pylint (concat python-binaries "pylint"))
-(defvar python-flake8 (concat python-binaries "flake8"))
+;; (defvar python-binaries "~/.local/opt/emacs-venv/bin/")
+;; (defvar python-interpreter (concat python-binaries "python"))
+;; (defvar python-pylint (concat python-binaries "pylint"))
+;; (defvar python-flake8 (concat python-binaries "flake8"))
+
+(defvar python-interpreter "python3.9")
+(defvar python-pylint "pylint")
+(defvar python-flake8 "flake8")
 
 (prefer-coding-system 'utf-8)
 (set-charset-priority 'unicode)

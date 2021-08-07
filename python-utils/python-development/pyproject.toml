@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "tiendil_development_utilities"
+version = "0.1"
+description = "Custom installation."
+authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+#astroid = "2.5.6"
+pylint = "^2.8"
+flake8 = "^3.9"
+
+# pylint crashed without that package
+pyenchant = "^3.2" # dictionaries for spelling checks
