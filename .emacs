@@ -202,6 +202,7 @@
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 
+;; https://lucidmanager.org/productivity/ricing-org-mode/
 ;; https://orgmode.org/worg/org-configs/org-customization-guide.html
 ;; examples: http://eschulte.github.io/org-scraps/
 ;;           http://doc.norang.ca/org-mode.html
@@ -218,12 +219,27 @@
 	org-export-coding-system 'utf-8
 	org-startup-indented t
 	org-enforce-todo-dependencies t
+
+	org-pretty-entities t
+	org-hide-emphasis-markers t
+
+	org-startup-with-inline-images t
+	org-image-actual-width '(300)
+
 	org-modules '(org-id)
 	org-todo-keywords '((sequence "TODO" "WORKING" "DONE")
 			    (sequence "|" "CANCELED")))
   :bind (("C-c l" . 'org-store-link)
 	 ("C-c a" . 'org-agenda)
 	 ("C-c c" . 'org-capture)))
+
+
+(use-package org-superstar
+  :defines (org-superstar-special-todo-items)
+  :config
+  (setq org-superstar-special-todo-items t)
+  (add-hook 'org-mode-hook (lambda ()
+                             (org-superstar-mode 1))))
 
 (use-package devdocs)
 
@@ -429,3 +445,16 @@
               (time-subtract after-init-time before-init-time))) gcs-done)
 
 ;;; .emacs ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(org-superstar yascroll workgroups2 which-key web-mode volatile-highlights use-package undo-tree typescript-mode smartparens reverse-im minions markdown-mode julia-mode json-mode ivy-prescient highlight-parentheses graphviz-dot-mode flycheck dumb-jump doom-themes doom-modeline dockerfile-mode docker-compose-mode dimmer devdocs counsel company-prescient command-log-mode color-identifiers-mode cheatsheet avy)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(font-lock-variable-name-face ((t (:foreground "violet")))))
