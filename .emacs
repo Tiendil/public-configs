@@ -80,7 +80,10 @@
 (fringe-mode 10)
 
 (setq inhibit-startup-message t
-      indent-tabs-mode nil)
+      indent-tabs-mode nil
+
+      ;; fix slowdown on unicode text
+      inhibit-compacting-font-caches t)
 
 (column-number-mode 1)
 (global-visual-line-mode 1)
@@ -217,8 +220,9 @@
 	org-return-follows-link nil
 	org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id
 	org-export-coding-system 'utf-8
-	org-startup-indented t
 	org-enforce-todo-dependencies t
+
+	org-hide-leading-stars nil
 
 	org-pretty-entities t
 	org-hide-emphasis-markers t
@@ -229,6 +233,7 @@
 	org-modules '(org-id)
 	org-todo-keywords '((sequence "TODO" "WORKING" "DONE")
 			    (sequence "|" "CANCELED")))
+
   :bind (("C-c l" . 'org-store-link)
 	 ("C-c a" . 'org-agenda)
 	 ("C-c c" . 'org-capture)))
@@ -237,7 +242,9 @@
 (use-package org-superstar
   :defines (org-superstar-special-todo-items)
   :config
-  (setq org-superstar-special-todo-items t)
+  (setq org-superstar-special-todo-items t
+	org-superstar-leading-bullet ?\s
+	org-superstar-headline-bullets-list '(?‣ ?○ ?• ?- ?= ?⁖ ?⁘ ?⁙))
   (add-hook 'org-mode-hook (lambda ()
                              (org-superstar-mode 1))))
 
