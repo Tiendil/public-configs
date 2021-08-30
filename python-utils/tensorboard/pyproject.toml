@@ -8,3 +8,4 @@ authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
 python = "^3.9"
 
 tensorflow = "^2.5"
+tensorboard-plugin-profile = "^2.5"
