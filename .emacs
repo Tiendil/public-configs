@@ -261,6 +261,9 @@
 (use-package markdown-mode
   :bind (("C-c o" . 'markdown-follow-link-at-point)))
 
+
+(use-package jinja2-mode)
+
 (use-package which-key
   :config
   (which-key-mode))
@@ -458,7 +461,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(org-superstar yascroll workgroups2 which-key web-mode volatile-highlights use-package undo-tree typescript-mode smartparens reverse-im minions markdown-mode julia-mode json-mode ivy-prescient highlight-parentheses graphviz-dot-mode flycheck dumb-jump doom-themes doom-modeline dockerfile-mode docker-compose-mode dimmer devdocs counsel company-prescient command-log-mode color-identifiers-mode cheatsheet avy)))
+   '(jinja2-mode jinaj2-mode org-superstar yascroll workgroups2 which-key web-mode volatile-highlights use-package undo-tree typescript-mode smartparens reverse-im minions markdown-mode julia-mode json-mode ivy-prescient highlight-parentheses graphviz-dot-mode flycheck dumb-jump doom-themes doom-modeline dockerfile-mode docker-compose-mode dimmer devdocs counsel company-prescient command-log-mode color-identifiers-mode cheatsheet avy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
