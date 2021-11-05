@@ -200,6 +200,8 @@
 (winner-mode 1)
 (global-auto-revert-mode t)
 
+(setq-default indent-tabs-mode nil)
+
 (desktop-save-mode)
 
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
