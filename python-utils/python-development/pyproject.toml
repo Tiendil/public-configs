@@ -8,8 +8,8 @@ authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
 python = "^3.9"
 
 #astroid = "2.5.6"
-pylint = "^2.8"
-flake8 = "^3.9"
+pylint = "^2.11"
+flake8 = "^4.0"
 
 # pylint crashed without that package
 pyenchant = "^3.2" # dictionaries for spelling checks

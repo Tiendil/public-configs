@@ -58,7 +58,7 @@
 ;; (defvar python-pylint (concat python-binaries "pylint"))
 ;; (defvar python-flake8 (concat python-binaries "flake8"))
 
-(defvar python-interpreter "python3.9")
+(defvar python-interpreter "python3.10")
 (defvar python-pylint "pylint")
 (defvar python-flake8 "flake8")
 
