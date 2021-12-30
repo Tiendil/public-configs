@@ -74,6 +74,11 @@
 
 (setq mac-command-modifier 'meta)
 
+;; by default, emacs initialize some strange input source on macos
+;; so, we redefine it to correct
+;; also, automatic input-method setup will be helpfull on all platforms
+(set-input-method "russian-computer")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; theme configs
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
