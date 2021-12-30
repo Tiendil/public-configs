@@ -66,13 +66,13 @@
 (set-charset-priority 'unicode)
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
-(setq frame-title-format '("%b@" (:eval (or (file-remote-p default-directory 'host) system-name)) " — Emacs"))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; macos configs
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq mac-command-modifier 'meta)
+;; http://gnu.ist.utl.pt/software/emacs/manual/html_node/Mac-Input.html
+(setq mac-command-modifier 'meta
+      mac-option-modifier nil)
 
 ;; by default, emacs initialize some strange input source on macos
 ;; so, we redefine it to correct
