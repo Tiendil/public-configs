@@ -5,10 +5,10 @@ description = "Custom installation."
 authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 
 #astroid = "2.5.6"
-pylint = "^2.11"
+pylint = "^2.12"
 flake8 = "^4.0"
 
 # pylint crashed without that package

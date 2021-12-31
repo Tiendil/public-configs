@@ -5,7 +5,7 @@ description = "Custom installation."
 authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 
 notebook = "^6.4"
 jupyter_server_mathjax = "^0.2"
@@ -15,6 +15,6 @@ ipywidgets = "^7.6"
 #dockernel = "^1"
 # dockernel = { path = "/home/tiendil/repos/mine/dockernel", develop = true }
 
-sympy = "^1.8"
-numpy = "^1.20"
-matplotlib = "^3.4"
+sympy = "^1.9"
+numpy = "^1.21"
+matplotlib = "^3.5"
