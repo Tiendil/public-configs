@@ -423,7 +423,7 @@
 (use-package magit)
 
 (use-package magit-gitflow
-  :hook (add-hook 'magit-mode-hook 'turn-on-magit-gitflow))
+  :hook (magit-mode . turn-on-magit-gitflow))
 
 (use-package cheatsheet
   :bind (("<f1>" . 'cheatsheet-show))
