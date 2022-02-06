@@ -21,13 +21,13 @@
 (package-initialize)
 
 (setq package-archives
-      '(("GNU ELPA"     . "https://elpa.gnu.org/packages/")
-        ("MELPA Stable" . "https://stable.melpa.org/packages/")
-        ("MELPA"        . "https://melpa.org/packages/"))
+      '(("gnu-elpa"     . "https://elpa.gnu.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("melpa"        . "https://melpa.org/packages/"))
       package-archive-priorities
-      '(("MELPA Stable" . 10)
-        ("GNU ELPA"     . 5)
-        ("MELPA"        . 0)))
+      '(("melpa-stable" . 10)
+        ("gnu-elpa"     . 5)
+        ("melpa"        . 0)))
 
 (require 'package)
 
@@ -109,9 +109,8 @@
 (put 'suspend-frame 'disabled t)
 
 (use-package doom-themes
-  :defines
-  doom-themes-enable-bold
-  doom-themes-enable-italic
+  :defines (doom-themes-enable-bold
+            doom-themes-enable-italic)
   :init
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
@@ -177,7 +176,7 @@
   (dimmer-mode t))
 
 (use-package color-identifiers-mode
-  :defines color-identifiers-coloring-method
+  :defines (color-identifiers-coloring-method)
   :init
   (setq color-identifiers-coloring-method :hash
 	color-identifiers:min-color-saturation 0.0
@@ -229,7 +228,8 @@
 (use-package org
   :mode (("\\.org$" . org-mode))
   :defines (org-id-link-to-org-use-id
-	    org-export-coding-system)
+	    org-export-coding-system
+            org-export-with-sub-superscripts)
   :init
   (setq org-directory "~/repos/mine/my-org-base"
 	org-startup-folded 'content
@@ -246,6 +246,8 @@
 
 	org-startup-with-inline-images t
 	org-image-actual-width '(300)
+
+        org-export-with-sub-superscripts nil
 
 	org-modules '(org-id)
 	org-todo-keywords '((sequence "TODO" "WORKING" "DONE")
@@ -316,7 +318,7 @@
   :config
   ;; integration with smartparens-mode
   (setq web-mode-enable-auto-pairing nil)
-  (defun sp-web-mode-is-code-context (id action context)
+-  (defun sp-web-mode-is-code-context (id action context)
     (and (eq action 'insert)
 	 (not (or (get-text-property (point) 'part-side)
 		  (get-text-property (point) 'block-side)))))
@@ -347,7 +349,7 @@
 ;;       see https://emacs.stackexchange.com/questions/38803/prelude-ivy-how-to-select-and-open-multiple-files
 ;;       solution works for counsel-find-file, but does not work for counsel-jump-file
 (use-package swiper
-  :defines counsel-find-file-ignore-regexp
+  :defines (counsel-find-file-ignore-regexp)
   :requires ivy
   :bind (("C-s" . 'swiper-isearch)
 	 ("M-x" . 'counsel-M-x)
@@ -369,12 +371,25 @@
   :config
   (ivy-mode 1))
 
-;; TODO: dumb-jump-back
-(use-package dumb-jump
-  :bind (("C-c o" . dumb-jump-go-other-window)
-         ("C-c j" . dumb-jump-go))
+
+;; currentrly, should be installed manually from gnu-elpa, to upgrade default package
+;; TODO: find a way to install automatically,
+(use-package xref
+  :ensure t
+  :pin gnu-elpa
   :init
-  (setq dumb-jump-selector 'ivy))
+  (setq xref-backend-functions (remq 'etags--xref-backend xref-backend-functions)))
+
+(use-package ivy-xref
+  :ensure t
+  :init
+  (setq xref-show-definitions-function #'ivy-xref-show-defs))
+
+(use-package dumb-jump
+  ;; :hook (xref-backend-functions . dumb-jump-xref-activate)
+  :init
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
 
 (use-package avy
   :bind (("C-g" . 'avy-goto-line)
@@ -393,7 +408,7 @@
   (volatile-highlights-mode t))
 
 (use-package company
-  :bind (("M-." . company-complete)
+  :bind (;;("M-." . company-complete)
 	 :map company-active-map
 	 ("C-n" . 'company-select-next)
 	 ("C-e" . 'company-select-next)
@@ -441,9 +456,9 @@
 			'(:key "C-g" :description "go to line")
 			'(:key "C-'" :description "go to position"))
   (cheatsheet-add-group '"Jump to"
-			'(:key "C-c o" :description "jump to definition in other frame")
-			'(:key "C-c o" :description "jump to link in markdown file")
-			'(:key "C-c j" :description "jump to definition in current frame"))
+			;; '(:key "C-c o" :description "jump to definition in other frame")
+			'(:key "C-c o" :description "jump to link in markdown file"))
+			;; '(:key "C-c j" :description "jump to definition in current frame"))
   (cheatsheet-add-group '"Undo tree"
 			'(:key "C-c u" :description "open undo tree3"))
   (cheatsheet-add-group '"Commands Log"
@@ -483,7 +498,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(magit-gitflow yascroll which-key web-mode volatile-highlights use-package undo-tree typescript-mode smartparens reverse-im org-superstar minions markdown-mode magit julia-mode json-mode jinja2-mode ivy-prescient highlight-parentheses graphviz-dot-mode flycheck dumb-jump doom-themes doom-modeline dockerfile-mode docker-compose-mode dimmer devdocs counsel company-prescient command-log-mode color-identifiers-mode cheatsheet avy)))
+   '(xref ivy-xref magit-gitflow yascroll which-key web-mode volatile-highlights use-package undo-tree typescript-mode smartparens reverse-im org-superstar minions markdown-mode magit julia-mode json-mode jinja2-mode ivy-prescient highlight-parentheses graphviz-dot-mode flycheck dumb-jump doom-themes doom-modeline dockerfile-mode docker-compose-mode dimmer devdocs counsel company-prescient command-log-mode color-identifiers-mode cheatsheet avy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
