@@ -248,6 +248,7 @@
 	org-image-actual-width '(300)
 
         org-export-with-sub-superscripts nil
+        org-use-sub-superscripts '{}
 
 	org-modules '(org-id)
 	org-todo-keywords '((sequence "TODO" "WORKING" "DONE")
