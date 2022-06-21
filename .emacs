@@ -288,9 +288,15 @@
   :config
   (which-key-mode))
 
-(use-package julia-mode)
-(use-package json-mode)
-(use-package typescript-mode)
+(use-package julia-mode
+   :init
+   (add-to-list 'auto-mode-alist '("\\.jl\\'" . typescript-mode)))
+(use-package json-mode
+   :init
+   (add-to-list 'auto-mode-alist '("\\.json\\'" . typescript-mode)))
+(use-package typescript-mode
+   :init
+   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode)))
 
 (use-package flycheck
   :init
@@ -306,6 +312,11 @@
   :init
   (require 'smartparens-config))
 
+
+(use-package terraform-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.tf\\'" . terraform-mode)))
+
 (use-package web-mode
   :init
   (setq web-mode-engines-alist '(("django" . "\\.html\\'"))
@@ -319,7 +330,7 @@
   :config
   ;; integration with smartparens-mode
   (setq web-mode-enable-auto-pairing nil)
--  (defun sp-web-mode-is-code-context (id action context)
+  (defun sp-web-mode-is-code-context (id action context)
     (and (eq action 'insert)
 	 (not (or (get-text-property (point) 'part-side)
 		  (get-text-property (point) 'block-side)))))
@@ -499,7 +510,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(xref ivy-xref magit-gitflow yascroll which-key web-mode volatile-highlights use-package undo-tree typescript-mode smartparens reverse-im org-superstar minions markdown-mode magit julia-mode json-mode jinja2-mode ivy-prescient highlight-parentheses graphviz-dot-mode flycheck dumb-jump doom-themes doom-modeline dockerfile-mode docker-compose-mode dimmer devdocs counsel company-prescient command-log-mode color-identifiers-mode cheatsheet avy)))
+   '(terraform-mode xref ivy-xref magit-gitflow yascroll which-key web-mode volatile-highlights use-package undo-tree typescript-mode smartparens reverse-im org-superstar minions markdown-mode magit julia-mode json-mode jinja2-mode ivy-prescient highlight-parentheses graphviz-dot-mode flycheck dumb-jump doom-themes doom-modeline dockerfile-mode docker-compose-mode dimmer devdocs counsel company-prescient command-log-mode color-identifiers-mode cheatsheet avy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
