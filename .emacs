@@ -282,7 +282,9 @@
   :bind (("C-c o" . 'markdown-follow-link-at-point)))
 
 
-(use-package jinja2-mode)
+(use-package jinja2-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.j2\\'" . jinja2-mode)))
 
 (use-package which-key
   :config
