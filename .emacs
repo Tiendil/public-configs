@@ -298,7 +298,8 @@
    (add-to-list 'auto-mode-alist '("\\.json\\'" . typescript-mode)))
 (use-package typescript-mode
    :init
-   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode)))
+   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode)))
 
 (use-package flycheck
   :init
