@@ -290,6 +290,11 @@
   :config
   (which-key-mode))
 
+
+;; sh-mode
+(add-to-list 'auto-mode-alist '("\\.sh\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
+
 (use-package julia-mode
    :init
    (add-to-list 'auto-mode-alist '("\\.jl\\'" . typescript-mode)))
