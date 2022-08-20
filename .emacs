@@ -172,13 +172,13 @@
 ;; TODO: dimmer works with bugs
 ;;       it periodically permanently dim windows.
 ;; TODO: dimmer causes bugs on startup
-(use-package dimmer
-  :init
-  (setq dimmer-adjustment-mode :foreground
-	dimmer-fraction 0.3)
-  :config
-  (dimmer-configure-which-key)
-  (dimmer-mode t))
+;; (use-package dimmer
+;;   :init
+;;   (setq dimmer-adjustment-mode :foreground
+;; 	dimmer-fraction 0.3)
+;;   :config
+;;   (dimmer-configure-which-key)
+;;   (dimmer-mode t))
 
 (use-package color-identifiers-mode
   :defines (color-identifiers-coloring-method)
