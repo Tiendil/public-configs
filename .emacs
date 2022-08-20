@@ -92,6 +92,10 @@
 (setq frame-title-format nil
       ns-use-proxy-icon nil)
 
+;; hide all decorations, like titlebar
+;; https://www.reddit.com/r/emacs/comments/b2r2oj/is_it_possible_to_disable_or_hide_the_titlebar_in/
+(setq default-frame-alist '((undecorated . t)))
+
 (fringe-mode 10)
 
 (setq inhibit-startup-message t
@@ -167,6 +171,7 @@
 
 ;; TODO: dimmer works with bugs
 ;;       it periodically permanently dim windows.
+;; TODO: dimmer causes bugs on startup
 (use-package dimmer
   :init
   (setq dimmer-adjustment-mode :foreground
