@@ -1,0 +1,35 @@
+[[package]]
+name = "xonsh"
+version = "0.13.1"
+description = "Python-powered, cross-platform, Unix-gazing shell"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.extras]
+test = ["virtualenv (>=20.16.2)", "pyte (>=0.8.0)", "coverage (>=5.3.1)", "pygments (>=2.2)", "prompt-toolkit (>=3.0.29)", "pytest-rerunfailures", "pytest-subprocess", "pytest-timeout", "pytest-mock", "pytest-cov", "restructuredtext-lint", "pytest (>=7)", "xonsh"]
+pygments = ["pygments (>=2.2)"]
+ptk = ["pyperclip", "prompt-toolkit (>=3.0.29)"]
+proctitle = ["setproctitle"]
+mac = ["gnureadline"]
+linux = ["distro"]
+full = ["setproctitle", "distro", "gnureadline", "ujson", "xonsh"]
+doc = ["myst-parser", "livereload", "runthis-sphinxext", "tornado", "doctr", "matplotlib", "pyzmq", "psutil", "sphinx (>=3.1,<5)", "numpydoc", "furo", "xonsh"]
+dev = ["tomli", "re-ver", "pre-commit", "xonsh"]
+bestshell = ["pygments (>=2.2)", "prompt-toolkit (>=3.0.29)"]
+
+[extras]
+xonsh = []
+
+[metadata]
+lock-version = "1.1"
+python-versions = "^3.10"
+content-hash = "088231384ed70b8aceb1b0542d4685c7278007bc448ac3c12a5e6246a4336921"
+
+[metadata.files]
+xonsh = [
+    {file = "xonsh-0.13.1-py310-none-any.whl", hash = "sha256:ab1d83f3a7fa2c70af521653dc56cb204660b4015bd9456cbafb25cf0a38c19f"},
+    {file = "xonsh-0.13.1-py38-none-any.whl", hash = "sha256:b54c1b5a216f235ecf9e1f038ee97c251bb65ee7bd685b8d672146cc9bf7029a"},
+    {file = "xonsh-0.13.1-py39-none-any.whl", hash = "sha256:66bb065c7b2f76d59615bb882dfe5bb64c769db71e48b2beb3719214e00197b6"},
+    {file = "xonsh-0.13.1.tar.gz", hash = "sha256:18822664c8ae84869d5bccb1560c797cbf657024fa560caab1360602274f80ac"},
+]

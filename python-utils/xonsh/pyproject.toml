@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "tiendil_xonsh_utilities"
+version = "0.1"
+description = "Custom installation."
+authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+xonsh = "^0.13"
+
+[tool.poetry.extras]
+xonsh = ["full"]
