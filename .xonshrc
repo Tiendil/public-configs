@@ -11,3 +11,5 @@ $PATH.append('/home/tiendil/.venv_poetry/bin')
 # XONSH WEBCONFIG START
 $PROMPT = '{BOLD_GREEN}{user}{BOLD_BLUE} {cwd}{branch_color} git{RESET} {RED}{last_return_code_if_nonzero:[{BOLD_INTENSE_RED}{}{RED}] }{RESET}{BOLD_BLUE}{prompt_end}{RESET} '
 # XONSH WEBCONFIG END
+
+$XONSH_COLOR_STYLE = 'dracula'
