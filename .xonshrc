@@ -1,0 +1,13 @@
+
+# Created by `userpath` on 2022-08-20 10:45:39
+$PATH.append('/home/tiendil/.local/bin')
+
+# Created by `userpath` on 2022-08-20 10:47:11
+$PATH.append('/home/tiendil/.pyenv/bin')
+
+# Created by `userpath` on 2022-08-20 10:52:11
+$PATH.append('/home/tiendil/.venv_poetry/bin')
+
+# XONSH WEBCONFIG START
+$PROMPT = '{BOLD_GREEN}{user}{BOLD_BLUE} {cwd}{branch_color} git{RESET} {RED}{last_return_code_if_nonzero:[{BOLD_INTENSE_RED}{}{RED}] }{RESET}{BOLD_BLUE}{prompt_end}{RESET} '
+# XONSH WEBCONFIG END

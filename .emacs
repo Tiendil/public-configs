@@ -349,6 +349,8 @@
 		  (get-text-property (point) 'block-side)))))
   (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context)))
 
+(use-package xonsh-mode)
+
 (use-package dockerfile-mode)
 
 (use-package docker-compose-mode)
@@ -523,7 +525,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(terraform-mode xref ivy-xref magit-gitflow yascroll which-key web-mode volatile-highlights use-package undo-tree typescript-mode smartparens reverse-im org-superstar minions markdown-mode magit julia-mode json-mode jinja2-mode ivy-prescient highlight-parentheses graphviz-dot-mode flycheck dumb-jump doom-themes doom-modeline dockerfile-mode docker-compose-mode dimmer devdocs counsel company-prescient command-log-mode color-identifiers-mode cheatsheet avy)))
+   '(xonsh-mode terraform-mode xref ivy-xref magit-gitflow yascroll which-key web-mode volatile-highlights use-package undo-tree typescript-mode smartparens reverse-im org-superstar minions markdown-mode magit julia-mode json-mode jinja2-mode ivy-prescient highlight-parentheses graphviz-dot-mode flycheck dumb-jump doom-themes doom-modeline dockerfile-mode docker-compose-mode dimmer devdocs counsel company-prescient command-log-mode color-identifiers-mode cheatsheet avy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

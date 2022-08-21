@@ -6,7 +6,10 @@ authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-xonsh = "^0.13"
 
-[tool.poetry.extras]
-xonsh = ["full"]
+# xonsh[full] does not work
+pygments = "^2.13"
+prompt-toolkit = "^3.0"
+setproctitle = "^1.3"
+
+xonsh = {version="^0.13"}
