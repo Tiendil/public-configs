@@ -12,6 +12,6 @@ $PATH.append('/home/tiendil/.venv_poetry/bin')
 $XONSH_COLOR_STYLE = 'paraiso-dark'
 
 # simplified
-$PROMPT = '{BOLD_GREEN}{user} {branch_color}{short_cwd}{RESET} {RED}{last_return_code_if_nonzero:[{BOLD_INTENSE_RED}{}{RED}] }{RESET}{BOLD_BLUE}{prompt_end}{RESET} '
+$PROMPT = '{BOLD_BLUE}{user} {branch_color}{short_cwd}{RESET} {RED}{last_return_code_if_nonzero:[{BOLD_INTENSE_RED}{}{RED}] }{RESET}{BOLD_BLUE}{prompt_end}{RESET} '
 
 xontrib load fish_completer coreutils
