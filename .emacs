@@ -11,6 +11,10 @@
 
 ;;; Code:
 
+;; return shell to default value
+;; a lot of packages do not work with smart shells like xonsh
+(setq shell-file-name (car (get 'shell-file-name 'standard-value)))
+
 ;; garbage collection threshold
 (setq gc-cons-threshold (* 128 1024 1024))
 
@@ -115,16 +119,10 @@
 (use-package doom-themes
   :defines (doom-themes-enable-bold
             doom-themes-enable-italic)
-  :init
+  :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  :config
-  ;; (load-theme 'doom-one t)
-  ;; (load-theme 'doom-vibrant t)
-  ;; (load-theme 'doom-city-lights t)
-  ;; (load-theme 'doom-tomorrow-night t)
-  ;; (load-theme 'doom-opera t)
-  ;; (load-theme 'doom-peacock t)
+
   (load-theme 'doom-dracula t)
 
   (doom-themes-visual-bell-config))
@@ -134,7 +132,7 @@
   (minions-mode 1))
 
 (use-package doom-modeline
-  :init
+  :config
   (setq doom-modeline-buffer-file-name-style 'buffer-name
 	doom-modeline-icon nil
 	doom-modeline-unicode-fallback nil
@@ -154,9 +152,8 @@
 
 (use-package hl-line
   :ensure nil
-  :init
-  (setq global-hl-line-sticky-flag t)
   :config
+  (setq global-hl-line-sticky-flag t)
   (set-face-background hl-line-face "black")
   (global-hl-line-mode))
 
@@ -166,7 +163,7 @@
 
 (use-package uniquify
   :ensure nil
-  :init
+  :config
   (setq uniquify-buffer-name-style 'forward))
 
 ;; TODO: dimmer works with bugs
@@ -182,17 +179,15 @@
 
 (use-package color-identifiers-mode
   :defines (color-identifiers-coloring-method)
-  :init
+  :config
   (setq color-identifiers-coloring-method :hash
 	color-identifiers:min-color-saturation 0.0
 	color-identifiers:max-color-saturation 1.0)
-  :config
   (global-color-identifiers-mode))
 
 (use-package yascroll
-  :init
-  (setq yascroll:delay-to-hide nil)
   :config
+  (setq yascroll:delay-to-hide nil)
   (global-yascroll-bar-mode))
 
 ;; translate input sequences to English,
@@ -235,7 +230,7 @@
   :defines (org-id-link-to-org-use-id
 	    org-export-coding-system
             org-export-with-sub-superscripts)
-  :init
+  :config
   (setq org-directory "~/repos/mine/my-org-base"
 	org-startup-folded 'content
 	org-tags-column 80
@@ -288,7 +283,7 @@
 
 
 (use-package jinja2-mode
-  :init
+  :config
   (add-to-list 'auto-mode-alist '("\\.j2\\'" . jinja2-mode)))
 
 (use-package which-key
@@ -301,37 +296,38 @@
 (add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
 
 (use-package julia-mode
-   :init
+   :config
    (add-to-list 'auto-mode-alist '("\\.jl\\'" . typescript-mode)))
+
 (use-package json-mode
-   :init
+   :config
    (add-to-list 'auto-mode-alist '("\\.json\\'" . typescript-mode)))
+
 (use-package typescript-mode
-   :init
+   :config
    (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
    (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode)))
 
 (use-package flycheck
-  :init
+  :config
   (setq flycheck-highlighting-mode 'sexps
 	flycheck-check-syntax-automatically '(mode-enabled save)
 	flycheck-pylint-use-symbolic-id nil
 	flycheck-python-pylint-executable python-pylint
 	flycheck-python-flake8-executable python-flake8)
-  :config
   (global-flycheck-mode))
 
 (use-package smartparens
-  :init
+  :config
   (require 'smartparens-config))
 
 
 (use-package terraform-mode
-  :init
+  :config
   (add-to-list 'auto-mode-alist '("\\.tf\\'" . terraform-mode)))
 
 (use-package web-mode
-  :init
+  :config
   (setq web-mode-engines-alist '(("django" . "\\.html\\'"))
 	web-mode-markup-indent-offset 2
 	web-mode-css-indent-offset 2
@@ -340,7 +336,6 @@
 	web-mode-script-padding 1
 	web-mode-block-padding 0)
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  :config
   ;; integration with smartparens-mode
   (setq web-mode-enable-auto-pairing nil)
   (defun sp-web-mode-is-code-context (id action context)
@@ -385,7 +380,7 @@
 	 :map counsel-find-file-map
 	 ("C-m" . ivy-partial-or-done)
 	 ("`" . 'tiendil-file-jump-from-find))
-  :init
+  :config
   (add-to-list 'completion-ignored-extensions "#")
   (add-to-list 'completion-ignored-extensions ".cache")
   (setq ivy-height 30
@@ -394,8 +389,6 @@
 	ivy-extra-directories nil
 	counsel-find-file-ignore-regexp (tiendil-prepare-file-search-regexp)
 	ivy-re-builders-alist '((t . ivy--regex-plus)))
-
-  :config
   (ivy-mode 1))
 
 
@@ -404,17 +397,17 @@
 (use-package xref
   :ensure t
   :pin gnu-elpa
-  :init
+  :config
   (setq xref-backend-functions (remq 'etags--xref-backend xref-backend-functions)))
 
 (use-package ivy-xref
   :ensure t
-  :init
+  :config
   (setq xref-show-definitions-function #'ivy-xref-show-defs))
 
 (use-package dumb-jump
   ;; :hook (xref-backend-functions . dumb-jump-xref-activate)
-  :init
+  :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
   (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
 
@@ -424,10 +417,9 @@
 
 (use-package undo-tree
   :bind (("C-c u" . undo-tree-visualize))
-  :init
+  :config
   (setq undo-tree-visualizer-diff 1
 	undo-tree-visualizer-timestamps 1)
-  :config
   (global-undo-tree-mode))
 
 (use-package volatile-highlights
@@ -441,14 +433,13 @@
 	 ("C-e" . 'company-select-next)
 	 ("C-p" . 'company-select-previous)
 	 ("C-a" . 'company-select-previous))
-  :init
+  :config
   (setq company-show-numbers 'left
 	company-idle-delay nil)
-  :config
   (global-company-mode))
 
 (use-package prescient
-  :init
+  :config
   (setq prescient-history-length 5))
 
 (use-package ivy-prescient
@@ -519,16 +510,3 @@
               (time-subtract after-init-time before-init-time))) gcs-done)
 
 ;;; .emacs ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(xonsh-mode terraform-mode xref ivy-xref magit-gitflow yascroll which-key web-mode volatile-highlights use-package undo-tree typescript-mode smartparens reverse-im org-superstar minions markdown-mode magit julia-mode json-mode jinja2-mode ivy-prescient highlight-parentheses graphviz-dot-mode flycheck dumb-jump doom-themes doom-modeline dockerfile-mode docker-compose-mode dimmer devdocs counsel company-prescient command-log-mode color-identifiers-mode cheatsheet avy)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(font-lock-variable-name-face ((t (:foreground "violet")))))
