@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "tiendil_jupyter_utilities"
+version = "0.1"
+description = "Custom installation."
+authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+notebook = "^6.4"
+jupyter_server_mathjax = "^0.2"
+ipywidgets = "^8.0"
+
+# docker images as kernels
+#dockernel = "^1"
+# dockernel = { path = "/home/tiendil/repos/mine/dockernel", develop = true }
+
+sympy = "^1.10"
+numpy = "^1.23"
+matplotlib = "^3.5"

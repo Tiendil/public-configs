@@ -11,6 +11,13 @@
 
 ;;; Code:
 
+;; return shell to default value
+;; a lot of packages do not work with smart shells like xonsh
+(setq shell-file-name (car (get 'shell-file-name 'standard-value)))
+
+;; garbage collection threshold
+(setq gc-cons-threshold (* 128 1024 1024))
+
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -18,13 +25,13 @@
 (package-initialize)
 
 (setq package-archives
-      '(("GNU ELPA"     . "https://elpa.gnu.org/packages/")
-        ("MELPA Stable" . "https://stable.melpa.org/packages/")
-        ("MELPA"        . "https://melpa.org/packages/"))
+      '(("gnu-elpa"     . "https://elpa.gnu.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("melpa"        . "https://melpa.org/packages/"))
       package-archive-priorities
-      '(("MELPA Stable" . 10)
-        ("GNU ELPA"     . 5)
-        ("MELPA"        . 0)))
+      '(("melpa-stable" . 10)
+        ("gnu-elpa"     . 5)
+        ("melpa"        . 0)))
 
 (require 'package)
 
@@ -50,16 +57,31 @@
 (setq vc-follow-symlinks t
       visible-bell t)
 
-(defvar python-binaries "~/soft/emacs-python/venv/bin/")
-(defvar python-interpreter (concat python-binaries "python"))
-(defvar python-pylint (concat python-binaries "pylint"))
-(defvar python-flake8 (concat python-binaries "flake8"))
+;; (defvar python-binaries "~/.local/opt/emacs-venv/bin/")
+;; (defvar python-interpreter (concat python-binaries "python"))
+;; (defvar python-pylint (concat python-binaries "pylint"))
+;; (defvar python-flake8 (concat python-binaries "flake8"))
+
+(defvar python-interpreter "python3.10")
+(defvar python-pylint "pylint")
+(defvar python-flake8 "flake8")
 
 (prefer-coding-system 'utf-8)
 (set-charset-priority 'unicode)
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
-(setq frame-title-format '("%b@" (:eval (or (file-remote-p default-directory 'host) system-name)) " — Emacs"))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; macos configs
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; http://gnu.ist.utl.pt/software/emacs/manual/html_node/Mac-Input.html
+(setq mac-command-modifier 'meta
+      mac-option-modifier nil)
+
+;; by default, emacs initialize some strange input source on macos
+;; so, we redefine it to correct
+;; also, automatic input-method setup will be helpfull on all platforms
+(set-input-method "russian-computer")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; theme configs
@@ -70,8 +92,21 @@
 (scroll-bar-mode -1)
 (global-eldoc-mode -1)
 
+;; hide text & icon in title bar
+(setq frame-title-format nil
+      ns-use-proxy-icon nil)
+
+;; hide all decorations, like titlebar
+;; https://www.reddit.com/r/emacs/comments/b2r2oj/is_it_possible_to_disable_or_hide_the_titlebar_in/
+(setq default-frame-alist '((undecorated . t)))
+
+(fringe-mode 10)
+
 (setq inhibit-startup-message t
-      indent-tabs-mode nil)
+      indent-tabs-mode nil
+
+      ;; fix slowdown on unicode text
+      inhibit-compacting-font-caches t)
 
 (column-number-mode 1)
 (global-visual-line-mode 1)
@@ -82,19 +117,12 @@
 (put 'suspend-frame 'disabled t)
 
 (use-package doom-themes
-  :defines
-  doom-themes-enable-bold
-  doom-themes-enable-italic
-  :init
+  :defines (doom-themes-enable-bold
+            doom-themes-enable-italic)
+  :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  :config
-  ;; (load-theme 'doom-one t)
-  ;; (load-theme 'doom-vibrant t)
-  ;; (load-theme 'doom-city-lights t)
-  ;; (load-theme 'doom-tomorrow-night t)
-  ;; (load-theme 'doom-opera t)
-  ;; (load-theme 'doom-peacock t)
+
   (load-theme 'doom-dracula t)
 
   (doom-themes-visual-bell-config))
@@ -104,7 +132,7 @@
   (minions-mode 1))
 
 (use-package doom-modeline
-  :init
+  :config
   (setq doom-modeline-buffer-file-name-style 'buffer-name
 	doom-modeline-icon nil
 	doom-modeline-unicode-fallback nil
@@ -124,9 +152,8 @@
 
 (use-package hl-line
   :ensure nil
-  :init
-  (setq global-hl-line-sticky-flag t)
   :config
+  (setq global-hl-line-sticky-flag t)
   (set-face-background hl-line-face "black")
   (global-hl-line-mode))
 
@@ -136,32 +163,31 @@
 
 (use-package uniquify
   :ensure nil
-  :init
+  :config
   (setq uniquify-buffer-name-style 'forward))
 
 ;; TODO: dimmer works with bugs
 ;;       it periodically permanently dim windows.
-(use-package dimmer
-  :init
-  (setq dimmer-adjustment-mode :foreground
-	dimmer-fraction 0.3)
-  :config
-  (dimmer-configure-which-key)
-  (dimmer-mode t))
+;; TODO: dimmer causes bugs on startup
+;; (use-package dimmer
+;;   :init
+;;   (setq dimmer-adjustment-mode :foreground
+;; 	dimmer-fraction 0.3)
+;;   :config
+;;   (dimmer-configure-which-key)
+;;   (dimmer-mode t))
 
 (use-package color-identifiers-mode
-  :defines color-identifiers-coloring-method
-  :init
+  :defines (color-identifiers-coloring-method)
+  :config
   (setq color-identifiers-coloring-method :hash
 	color-identifiers:min-color-saturation 0.0
 	color-identifiers:max-color-saturation 1.0)
-  :config
   (global-color-identifiers-mode))
 
 (use-package yascroll
-  :init
-  (setq yascroll:delay-to-hide nil)
   :config
+  (setq yascroll:delay-to-hide nil)
   (global-yascroll-bar-mode))
 
 ;; translate input sequences to English,
@@ -173,6 +199,12 @@
   :config
   (reverse-im-mode t))
 
+;; better navigation on windows layout
+(global-set-key (kbd "C-c b") 'windmove-left)
+(global-set-key (kbd "C-c f") 'windmove-right)
+(global-set-key (kbd "C-c p") 'windmove-up)
+(global-set-key (kbd "C-c n") 'windmove-down)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; modes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -182,33 +214,59 @@
 (winner-mode 1)
 (global-auto-revert-mode t)
 
+(setq-default indent-tabs-mode nil)
+
 (desktop-save-mode)
 
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 
+;; https://lucidmanager.org/productivity/ricing-org-mode/
 ;; https://orgmode.org/worg/org-configs/org-customization-guide.html
 ;; examples: http://eschulte.github.io/org-scraps/
 ;;           http://doc.norang.ca/org-mode.html
 (use-package org
   :mode (("\\.org$" . org-mode))
   :defines (org-id-link-to-org-use-id
-	    org-export-coding-system)
-  :init
+	    org-export-coding-system
+            org-export-with-sub-superscripts)
+  :config
   (setq org-directory "~/repos/mine/my-org-base"
 	org-startup-folded 'content
 	org-tags-column 80
 	org-return-follows-link nil
 	org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id
 	org-export-coding-system 'utf-8
-	org-startup-indented t
 	org-enforce-todo-dependencies t
+
+	org-hide-leading-stars nil
+
+	org-pretty-entities t
+	org-hide-emphasis-markers t
+
+	org-startup-with-inline-images t
+	org-image-actual-width '(300)
+
+        org-export-with-sub-superscripts nil
+        org-use-sub-superscripts '{}
+
 	org-modules '(org-id)
 	org-todo-keywords '((sequence "TODO" "WORKING" "DONE")
 			    (sequence "|" "CANCELED")))
+
   :bind (("C-c l" . 'org-store-link)
 	 ("C-c a" . 'org-agenda)
 	 ("C-c c" . 'org-capture)))
+
+
+(use-package org-superstar
+  :defines (org-superstar-special-todo-items)
+  :config
+  (setq org-superstar-special-todo-items t
+	org-superstar-leading-bullet ?\s
+	org-superstar-headline-bullets-list '(?‣ ?○ ?• ?- ?= ?⁖ ?⁘ ?⁙))
+  (add-hook 'org-mode-hook (lambda ()
+                             (org-superstar-mode 1))))
 
 (use-package devdocs)
 
@@ -223,30 +281,53 @@
 (use-package markdown-mode
   :bind (("C-c o" . 'markdown-follow-link-at-point)))
 
+
+(use-package jinja2-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.j2\\'" . jinja2-mode)))
+
 (use-package which-key
   :config
   (which-key-mode))
 
-(use-package julia-mode)
-(use-package json-mode)
-(use-package typescript-mode)
+
+;; sh-mode
+(add-to-list 'auto-mode-alist '("\\.sh\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
+
+(use-package julia-mode
+   :config
+   (add-to-list 'auto-mode-alist '("\\.jl\\'" . typescript-mode)))
+
+(use-package json-mode
+   :config
+   (add-to-list 'auto-mode-alist '("\\.json\\'" . typescript-mode)))
+
+(use-package typescript-mode
+   :config
+   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode)))
 
 (use-package flycheck
-  :init
+  :config
   (setq flycheck-highlighting-mode 'sexps
 	flycheck-check-syntax-automatically '(mode-enabled save)
 	flycheck-pylint-use-symbolic-id nil
 	flycheck-python-pylint-executable python-pylint
 	flycheck-python-flake8-executable python-flake8)
-  :config
   (global-flycheck-mode))
 
 (use-package smartparens
-  :init
+  :config
   (require 'smartparens-config))
 
+
+(use-package terraform-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.tf\\'" . terraform-mode)))
+
 (use-package web-mode
-  :init
+  :config
   (setq web-mode-engines-alist '(("django" . "\\.html\\'"))
 	web-mode-markup-indent-offset 2
 	web-mode-css-indent-offset 2
@@ -255,7 +336,6 @@
 	web-mode-script-padding 1
 	web-mode-block-padding 0)
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  :config
   ;; integration with smartparens-mode
   (setq web-mode-enable-auto-pairing nil)
   (defun sp-web-mode-is-code-context (id action context)
@@ -263,6 +343,12 @@
 	 (not (or (get-text-property (point) 'part-side)
 		  (get-text-property (point) 'block-side)))))
   (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context)))
+
+(use-package xonsh-mode)
+
+(use-package dockerfile-mode)
+
+(use-package docker-compose-mode)
 
 (use-package counsel)
 
@@ -285,7 +371,7 @@
 ;;       see https://emacs.stackexchange.com/questions/38803/prelude-ivy-how-to-select-and-open-multiple-files
 ;;       solution works for counsel-find-file, but does not work for counsel-jump-file
 (use-package swiper
-  :defines counsel-find-file-ignore-regexp
+  :defines (counsel-find-file-ignore-regexp)
   :requires ivy
   :bind (("C-s" . 'swiper-isearch)
 	 ("M-x" . 'counsel-M-x)
@@ -294,7 +380,7 @@
 	 :map counsel-find-file-map
 	 ("C-m" . ivy-partial-or-done)
 	 ("`" . 'tiendil-file-jump-from-find))
-  :init
+  :config
   (add-to-list 'completion-ignored-extensions "#")
   (add-to-list 'completion-ignored-extensions ".cache")
   (setq ivy-height 30
@@ -303,16 +389,27 @@
 	ivy-extra-directories nil
 	counsel-find-file-ignore-regexp (tiendil-prepare-file-search-regexp)
 	ivy-re-builders-alist '((t . ivy--regex-plus)))
-
-  :config
   (ivy-mode 1))
 
-;; TODO: dumb-jump-back
+
+;; currentrly, should be installed manually from gnu-elpa, to upgrade default package
+;; TODO: find a way to install automatically,
+(use-package xref
+  :ensure t
+  :pin gnu-elpa
+  :config
+  (setq xref-backend-functions (remq 'etags--xref-backend xref-backend-functions)))
+
+(use-package ivy-xref
+  :ensure t
+  :config
+  (setq xref-show-definitions-function #'ivy-xref-show-defs))
+
 (use-package dumb-jump
-  :bind (("C-c o" . dumb-jump-go-other-window)
-         ("C-c j" . dumb-jump-go))
-  :init
-  (setq dumb-jump-selector 'ivy))
+  ;; :hook (xref-backend-functions . dumb-jump-xref-activate)
+  :config
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
 
 (use-package avy
   :bind (("C-g" . 'avy-goto-line)
@@ -320,10 +417,9 @@
 
 (use-package undo-tree
   :bind (("C-c u" . undo-tree-visualize))
-  :init
+  :config
   (setq undo-tree-visualizer-diff 1
 	undo-tree-visualizer-timestamps 1)
-  :config
   (global-undo-tree-mode))
 
 (use-package volatile-highlights
@@ -331,20 +427,19 @@
   (volatile-highlights-mode t))
 
 (use-package company
-  :bind (("M-." . company-complete)
+  :bind (;;("M-." . company-complete)
 	 :map company-active-map
 	 ("C-n" . 'company-select-next)
 	 ("C-e" . 'company-select-next)
 	 ("C-p" . 'company-select-previous)
 	 ("C-a" . 'company-select-previous))
-  :init
+  :config
   (setq company-show-numbers 'left
 	company-idle-delay nil)
-  :config
   (global-company-mode))
 
 (use-package prescient
-  :init
+  :config
   (setq prescient-history-length 5))
 
 (use-package ivy-prescient
@@ -357,6 +452,11 @@
 
 (use-package command-log-mode
   :bind (("C-c C-l" . clm/open-command-log-buffer)))
+
+(use-package magit)
+
+(use-package magit-gitflow
+  :hook (magit-mode . turn-on-magit-gitflow))
 
 (use-package cheatsheet
   :bind (("<f1>" . 'cheatsheet-show))
@@ -374,9 +474,9 @@
 			'(:key "C-g" :description "go to line")
 			'(:key "C-'" :description "go to position"))
   (cheatsheet-add-group '"Jump to"
-			'(:key "C-c o" :description "jump to definition in other frame")
-			'(:key "C-c o" :description "jump to link in markdown file")
-			'(:key "C-c j" :description "jump to definition in current frame"))
+			;; '(:key "C-c o" :description "jump to definition in other frame")
+			'(:key "C-c o" :description "jump to link in markdown file"))
+			;; '(:key "C-c j" :description "jump to definition in current frame"))
   (cheatsheet-add-group '"Undo tree"
 			'(:key "C-c u" :description "open undo tree3"))
   (cheatsheet-add-group '"Commands Log"
@@ -387,17 +487,26 @@
 			'(:key "C-x +" :description "balance windows sizes")))
 
 (provide '.emacs)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Fixes/hacks
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; disable emacs customize functions
+;; copied from https://github.com/hlissner/doom-emacs/blob/develop/core/core-ui.el#L685-L696
+(dolist (sym '(customize-option customize-browse customize-group customize-face
+               customize-rogue customize-saved customize-apropos
+               customize-changed customize-unsaved customize-variable
+               customize-set-value customize-customized customize-set-variable
+               customize-apropos-faces customize-save-variable
+               customize-apropos-groups customize-apropos-options
+               customize-changed-options customize-save-customized))
+  (put sym 'disabled "do not support `customize'"))
+
+
+(message "*** Emacs loaded in %s with %d garbage collections."
+     (format "%.2f seconds"
+             (float-time
+              (time-subtract after-init-time before-init-time))) gcs-done)
+
 ;;; .emacs ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(mlscroll org-super-links devdocs graphviz-dot-mode yascroll yaml-mode workgroups2 which-key web-mode vue-mode volatile-highlights use-package undo-tree typescript-mode telephone-line sublimity solaire-mode smex smartparens smart-mode-line rainbow-mode rainbow-delimiters python-mode protobuf-mode pretty-mode powerline php-mode moody mode-icons minions lsp-ui lsp-julia lsp-ivy json-mode jinja2-mode ivy-rich ivy-prescient highline highlight-symbol highlight-parentheses helm-lsp guess-language focus flycheck-pos-tip flycheck-julia flycheck-inline flycheck-color-mode-line etags-select elpy dumb-jump doom-themes doom-modeline dimmer counsel company-prescient command-log-mode color-identifiers-mode cheatsheet beacon bbcode-mode avy auto-dim-other-buffers auto-complete amx all-the-icons-ivy)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(font-lock-variable-name-face ((t (:foreground "violet")))))

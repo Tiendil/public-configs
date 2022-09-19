@@ -1,0 +1,15 @@
+[[package]]
+name = "sshuttle"
+version = "1.1.0"
+description = "Full-featured\" VPN over an SSH tunnel"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[metadata]
+lock-version = "1.1"
+python-versions = "^3.10"
+content-hash = "66fec20ff3736c492dd775fe122a4275df4cd172fdfebccb329df40d1f1f2554"
+
+[metadata.files]
+sshuttle = []
