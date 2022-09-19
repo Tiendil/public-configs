@@ -1,9 +1,16 @@
 [tool.poetry]
-name = "tiendil_sshuttle_utilities"
+name = "tiendil_xonsh_utilities"
 version = "0.1"
 description = "Custom installation."
 authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-sshuttle = "^1.1"
+
+# xonsh[full] does not work
+
+pygments = "^2.13"
+setproctitle = "^1.3"
+prompt-toolkit = "^3.0"
+
+xonsh = {version="^0.13"}

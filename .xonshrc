@@ -1,0 +1,17 @@
+
+# Created by `userpath` on 2022-08-20 10:45:39
+$PATH.append('/home/tiendil/.local/bin')
+
+# Created by `userpath` on 2022-08-20 10:47:11
+$PATH.append('/home/tiendil/.pyenv/bin')
+
+# Created by `userpath` on 2022-08-20 10:52:11
+$PATH.append('/home/tiendil/.venv_poetry/bin')
+
+# dracula does not works correctly
+$XONSH_COLOR_STYLE = 'paraiso-dark'
+
+# simplified
+$PROMPT = '{BOLD_BLUE}{user} {branch_color}{short_cwd}{RESET} {RED}{last_return_code_if_nonzero:[{BOLD_INTENSE_RED}{}{RED}] }{RESET}{BOLD_BLUE}{prompt_end}{RESET} '
+
+xontrib load fish_completer coreutils

@@ -5,7 +5,7 @@ description = "Custom installation."
 authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "3.10"
 
-tensorflow = "^2.5"
-tensorboard-plugin-profile = "^2.5"
+tensorflow = "^2.9"
+tensorboard-plugin-profile = "^2.8"

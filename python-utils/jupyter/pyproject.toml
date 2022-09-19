@@ -9,12 +9,12 @@ python = "^3.10"
 
 notebook = "^6.4"
 jupyter_server_mathjax = "^0.2"
-ipywidgets = "^7.6"
+ipywidgets = "^8.0"
 
 # docker images as kernels
 #dockernel = "^1"
 # dockernel = { path = "/home/tiendil/repos/mine/dockernel", develop = true }
 
-sympy = "^1.9"
-numpy = "^1.21"
+sympy = "^1.10"
+numpy = "^1.23"
 matplotlib = "^3.5"
