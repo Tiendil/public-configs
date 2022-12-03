@@ -282,6 +282,9 @@
   :bind (("C-c o" . 'markdown-follow-link-at-point)))
 
 
+(use-package caddyfile-mode)
+
+
 (use-package jinja2-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.j2\\'" . jinja2-mode)))
