@@ -317,7 +317,8 @@
 	flycheck-check-syntax-automatically '(mode-enabled save)
 	flycheck-pylint-use-symbolic-id nil
 	flycheck-python-pylint-executable python-pylint
-	flycheck-python-flake8-executable python-flake8)
+	flycheck-python-flake8-executable python-flake8
+        flycheck-flake8rc ".flake8")
   (global-flycheck-mode))
 
 (use-package smartparens
