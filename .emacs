@@ -65,6 +65,7 @@
 (defvar python-interpreter "python3.10")
 (defvar python-pylint "pylint")
 (defvar python-flake8 "flake8")
+(defvar python-mypy "mypy")
 
 (prefer-coding-system 'utf-8)
 (set-charset-priority 'unicode)
@@ -149,6 +150,11 @@
 
   :config
   (doom-modeline-mode 1))
+
+
+(use-package py-isort
+  :config
+  (add-hook 'before-save-hook 'py-isort-before-save))
 
 (use-package hl-line
   :ensure nil
@@ -318,6 +324,8 @@
 	flycheck-pylint-use-symbolic-id nil
 	flycheck-python-pylint-executable python-pylint
 	flycheck-python-flake8-executable python-flake8
+	flycheck-python-mypy-executable python-mypy
+        flycheck-python-mypy-config ".mypy.ini"
         flycheck-flake8rc ".flake8")
   (global-flycheck-mode))
 
