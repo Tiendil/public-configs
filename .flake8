@@ -1,4 +1,5 @@
 [flake8]
-ignore = W504,F821,E129,D100,D101,D102,D103,D105,D106,D107,CFQ004,ABS101,S101,E227
+# S608 disbled due to common pattern of inserting table names into sql
+ignore = W504,F821,E129,D100,D101,D102,D103,D104,D105,D106,D107,CFQ004,ABS101,S101,E227,S608
 max-line-length = 119
 max-complexity = 10

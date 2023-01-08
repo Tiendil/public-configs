@@ -8,8 +8,10 @@
 # TODO: remove E1120 after pylint stop confusing, when decorators change functions arguments specification
 #       see https://github.com/PyCQA/pylint/issues/259 for details
 # TODO: remove E0611 when pylint will determine current virtual environment and use it
+# TODO: R0401 give wrong messages
 # R1706 give wrong sugestions https://github.com/PyCQA/pylint/issues/2058 and sugest require bool-expressions into if-expressions
-disable=E0602,E0402,C0114,C0115,C0116,W0622,R0903,E0401,R0201,W0212,E1136,W0611,W0703,C0413,E1120,E0611,R1706,C0103,W0621,E0213
+# C0411 should be controlled by isort
+disable=E0602,E0402,C0114,C0115,C0116,W0622,R0903,E0401,W0212,E1136,W0611,W0703,C0413,E1120,E0611,R1706,C0103,W0621,E0213,R0911,W0603,C0411,R0401
 
 good-names=i,
            j,
@@ -40,4 +42,4 @@ notes=FIXME
 
 max-args = 10
 
-spelling-ignore-words = noqa,tarantoga,pydantic,deserialize,str,enum,json,serializable,Feedly,pytest,async,preprocess,mixin,precompile,sortedcontainers,url,guid,smth,config,idna,unparsing,configs,reimplemented,mutator,storages,autodiscovery,boolean,FSM
+spelling-ignore-words = noqa,tarantoga,pydantic,deserialize,str,enum,json,serializable,Feedly,pytest,async,preprocess,mixin,precompile,sortedcontainers,url,guid,smth,config,idna,unparsing,configs,reimplemented,mutator,storages,autodiscovery,boolean,FSM,antiduplication,conceptualizer,pgbouncer

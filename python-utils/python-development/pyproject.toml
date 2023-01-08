@@ -8,7 +8,7 @@ authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
 python = "^3.10"
 
 #astroid = "2.5.6"
-pylint = "^2.14"
+pylint = {extras = ["spelling"], version="^2.14"}
 
 flake8 = "^5.0"
 flake8-isort = "^5.0.3"
