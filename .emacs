@@ -18,35 +18,27 @@
 ;; garbage collection threshold
 (setq gc-cons-threshold (* 128 1024 1024))
 
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-(package-initialize)
-
-(setq package-archives
-      '(("gnu-elpa"     . "https://elpa.gnu.org/packages/")
-        ("melpa-stable" . "https://stable.melpa.org/packages/")
-        ("melpa"        . "https://melpa.org/packages/"))
-      package-archive-priorities
-      '(("melpa-stable" . 10)
-        ("gnu-elpa"     . 5)
-        ("melpa"        . 0)))
-
-(require 'package)
+;; install straight package manager
+(setq package-enable-at-startup nil)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6)
+      (straight-use-package-by-default t))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; use-package
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(eval-when-compile (require 'use-package))
-
-(require 'use-package-ensure)
-(setq use-package-always-ensure t)
+(straight-use-package 'use-package)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; global config
@@ -157,7 +149,6 @@
   (add-hook 'before-save-hook 'py-isort-before-save))
 
 (use-package hl-line
-  :ensure nil
   :config
   (setq global-hl-line-sticky-flag t)
   (set-face-background hl-line-face "black")
@@ -168,7 +159,6 @@
   (global-highlight-parentheses-mode t))
 
 (use-package uniquify
-  :ensure nil
   :config
   (setq uniquify-buffer-name-style 'forward))
 
@@ -199,7 +189,6 @@
 ;; translate input sequences to English,
 ;; so we can use Emacs bindings while a non-default system layout is active.
 (use-package reverse-im
-  :ensure t
   :custom
   (reverse-im-input-methods '("russian-computer"))
   :config
@@ -359,6 +348,8 @@
   (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context)))
 
 (use-package vue-mode
+  ;; packages has not seen without this
+  :straight (:host github :repo "AdamNiederer/vue-mode" :files ("dist" "*.el"))
   :config
   (add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode)))
 
@@ -413,13 +404,10 @@
 ;; currentrly, should be installed manually from gnu-elpa, to upgrade default package
 ;; TODO: find a way to install automatically,
 (use-package xref
-  :ensure t
-  :pin gnu-elpa
   :config
   (setq xref-backend-functions (remq 'etags--xref-backend xref-backend-functions)))
 
 (use-package ivy-xref
-  :ensure t
   :config
   (setq xref-show-definitions-function #'ivy-xref-show-defs))
 
@@ -475,6 +463,10 @@
 
 (use-package magit-gitflow
   :hook (magit-mode . turn-on-magit-gitflow))
+
+(use-package copilot
+  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  )
 
 (use-package cheatsheet
   :bind (("<f1>" . 'cheatsheet-show))
