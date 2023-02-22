@@ -466,7 +466,8 @@
 
 (use-package copilot
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
-  )
+  :config
+  (global-copilot-mode))
 
 (use-package cheatsheet
   :bind (("<f1>" . 'cheatsheet-show))
