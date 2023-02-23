@@ -466,6 +466,8 @@
 
 (use-package copilot
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  :bind (("M-\[" . 'copilot-accept-completion-by-word)
+         ("M-\]" . 'copilot-accept-completion))
   :config
   (global-copilot-mode))
 
