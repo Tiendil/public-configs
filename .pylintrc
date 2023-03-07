@@ -42,4 +42,4 @@ notes=FIXME
 
 max-args = 10
 
-spelling-ignore-words = noqa,tarantoga,pydantic,deserialize,str,enum,json,serializable,Feedly,pytest,async,preprocess,mixin,precompile,sortedcontainers,url,guid,smth,config,idna,unparsing,configs,reimplemented,mutator,storages,autodiscovery,boolean,FSM,antiduplication,conceptualizer,pgbouncer
+spelling-ignore-words = noqa,tarantoga,pydantic,deserialize,str,enum,json,serializable,Feedly,pytest,async,preprocess,mixin,precompile,sortedcontainers,url,guid,smth,config,idna,unparsing,configs,reimplemented,mutator,storages,autodiscovery,boolean,FSM,antiduplication,conceptualizer,pgbouncer,validators
