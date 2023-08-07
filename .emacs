@@ -302,9 +302,10 @@
    (add-to-list 'auto-mode-alist '("\\.json\\'" . typescript-mode)))
 
 (use-package typescript-mode
-   :config
-   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
-   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode)))
+  :config
+  (setq typescript-indent-level 2)
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode)))
 
 (use-package flycheck
   :config
