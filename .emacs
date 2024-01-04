@@ -214,6 +214,8 @@
 (global-auto-revert-mode t)
 
 (setq-default indent-tabs-mode nil)
+;; required to copilot mode work without warnings in all modes
+;; (setq-default tab-width 4)
 
 (desktop-save-mode)
 
@@ -471,9 +473,13 @@
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
   :bind (("M-\[" . 'copilot-accept-completion-by-word)
          ("M-\]" . 'copilot-accept-completion))
-)
-;;  :config
-;;  (global-copilot-mode))
+  :hook ((prog-mode . copilot-mode)
+         (text-mode . copilot-mode))
+  ;; :config
+  ;; this code hangs computer by starting a lot of node.js processes on emacs startup
+  ;; but call of global-copilot-mode after emacs starter works ok
+  ;; (global-copilot-mode))
+ )
 
 (use-package cheatsheet
   :bind (("<f1>" . 'cheatsheet-show))
@@ -533,7 +539,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(vue-mode php-mode yascroll xonsh-mode which-key web-mode volatile-highlights use-package undo-tree typescript-mode terraform-mode smartparens reverse-im org-superstar minions markdown-mode magit-gitflow julia-mode json-mode jinja2-mode ivy-xref ivy-prescient highlight-parentheses graphviz-dot-mode flycheck dumb-jump doom-themes doom-modeline dockerfile-mode docker-compose-mode devdocs counsel company-prescient command-log-mode color-identifiers-mode cheatsheet caddyfile-mode avy)))
+   '(vue-mode php-mode yascroll xonsh-mode which-key web-mode volatile-highlights use-package undo-tree typescript-mode terraform-mode smartparens reverse-im org-superstar minions markdown-mode magit-gitflow julia-mode json-mode jinja2-mode ivy-xref ivy-prescient highlight-parentheses graphviz-dot-mode flycheck dumb-jump doom-themes doom-modeline dockerfile-mode docker-compose-mode devdocs counsel company-prescient command-log-mode color-identifiers-mode cheatsheet caddyfile-mode avy))
+ '(warning-suppress-types '((comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
