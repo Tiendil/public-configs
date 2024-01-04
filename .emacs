@@ -471,8 +471,6 @@
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
   :bind (("M-\[" . 'copilot-accept-completion-by-word)
          ("M-\]" . 'copilot-accept-completion))
-  :config
-  (setq warning-suppress-types '(((copilot copilot-no-mode-indent))))
 )
 ;;  :config
 ;;  (global-copilot-mode))
