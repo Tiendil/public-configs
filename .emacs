@@ -465,12 +465,12 @@
 (use-package magit-gitflow
   :hook (magit-mode . turn-on-magit-gitflow))
 
-(use-package copilot
-  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
-  :bind (("M-\[" . 'copilot-accept-completion-by-word)
-         ("M-\]" . 'copilot-accept-completion))
-  :config
-  (global-copilot-mode))
+;; (use-package copilot
+;;   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+;;   :bind (("M-\[" . 'copilot-accept-completion-by-word)
+;;          ("M-\]" . 'copilot-accept-completion))
+;;   :config
+;;   (global-copilot-mode))
 
 (use-package cheatsheet
   :bind (("<f1>" . 'cheatsheet-show))

@@ -5,26 +5,26 @@ description = "Custom installation."
 authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.12"
 
 #astroid = "2.5.6"
-pylint = {extras = ["spelling"], version="^2.14"}
+pylint = {extras = ["spelling"], version="^3.0"}
 
-flake8 = "^5.0"
-flake8-isort = "^5.0.3"
-flake8-docstrings = "^1.6.0"
-flake8-functions = "^0.0.7"
-flake8-annotations-complexity = "^0.0.7"
+flake8 = "^6.1"
+flake8-isort = "^6.1.1"
+flake8-docstrings = "^1.7.0"
+flake8-functions = "^0.0.8"
+flake8-annotations-complexity = "^0.0.8"
 flake8-cognitive-complexity = "^0.1.0"
 flake8-pytest = "^1.4"
 flake8-bandit = "^4.1.1"
-flake8-eradicate = "^1.4.0"
-flake8-absolute-import = "^1.0.0.1"
+flake8-eradicate = "^1.5.0"
+flake8-absolute-import = "^1.0.0.2"
 flake8-print = "^5.0.0"
-flake8-pyproject = "^1.2.2"
+flake8-pyproject = "^1.2.3"
 
 # pylint crashed without that package
 pyenchant = "^3.2" # dictionaries for spelling checks
 
-mypy = "^0.991"
-isort = "^5.11.4"
+mypy = "^1.8"
+isort = "^5.13.2"

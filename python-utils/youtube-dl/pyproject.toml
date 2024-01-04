@@ -5,6 +5,6 @@ description = "Custom installation."
 authors = ["Aliaksei Yaletski (Tiendil) <a.eletsky@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.12"
 
 youtube-dl = "2021.12.17"
