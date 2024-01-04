@@ -38,6 +38,9 @@
 ;; use-package
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; (add-to-list 'package-archives
+;;              '("melpa" . "https://melpa.org/packages/") t)
+
 (straight-use-package 'use-package)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -145,6 +148,7 @@
 
 
 (use-package py-isort
+  :straight t
   :config
   (add-hook 'before-save-hook 'py-isort-before-save))
 
@@ -328,8 +332,6 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.tf\\'" . terraform-mode)))
 
-(use-package php-mode)
-
 (use-package web-mode
   :config
   (setq web-mode-engines-alist '(("django" . "\\.html\\'"))
@@ -465,12 +467,15 @@
 (use-package magit-gitflow
   :hook (magit-mode . turn-on-magit-gitflow))
 
-;; (use-package copilot
-;;   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
-;;   :bind (("M-\[" . 'copilot-accept-completion-by-word)
-;;          ("M-\]" . 'copilot-accept-completion))
-;;   :config
-;;   (global-copilot-mode))
+(use-package copilot
+  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  :bind (("M-\[" . 'copilot-accept-completion-by-word)
+         ("M-\]" . 'copilot-accept-completion))
+  :config
+  (setq warning-suppress-types '(((copilot copilot-no-mode-indent))))
+)
+;;  :config
+;;  (global-copilot-mode))
 
 (use-package cheatsheet
   :bind (("<f1>" . 'cheatsheet-show))
