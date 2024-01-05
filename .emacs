@@ -280,7 +280,10 @@
 
 
 (use-package markdown-mode
-  :bind (("C-c o" . 'markdown-follow-link-at-point)))
+  :bind (("C-c o" . 'markdown-follow-link-at-point))
+  :config
+  (setq markdown-list-indent-width 2)
+  )
 
 
 (use-package caddyfile-mode)
@@ -475,11 +478,14 @@
          ("M-\]" . 'copilot-accept-completion))
   :hook ((prog-mode . copilot-mode)
          (text-mode . copilot-mode))
+  :config
+  (add-to-list 'copilot--indentation-alist '(markdown-mode markdown-list-indent-width))
+
   ;; :config
   ;; this code hangs computer by starting a lot of node.js processes on emacs startup
   ;; but call of global-copilot-mode after emacs starter works ok
   ;; (global-copilot-mode))
- )
+)
 
 (use-package cheatsheet
   :bind (("<f1>" . 'cheatsheet-show))
@@ -540,7 +546,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    '(vue-mode php-mode yascroll xonsh-mode which-key web-mode volatile-highlights use-package undo-tree typescript-mode terraform-mode smartparens reverse-im org-superstar minions markdown-mode magit-gitflow julia-mode json-mode jinja2-mode ivy-xref ivy-prescient highlight-parentheses graphviz-dot-mode flycheck dumb-jump doom-themes doom-modeline dockerfile-mode docker-compose-mode devdocs counsel company-prescient command-log-mode color-identifiers-mode cheatsheet caddyfile-mode avy))
- '(warning-suppress-types '((comp))))
+ '(warning-suppress-types '((emacs) (comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
