@@ -214,8 +214,6 @@
 (global-auto-revert-mode t)
 
 (setq-default indent-tabs-mode nil)
-;; required to copilot mode work without warnings in all modes
-;; (setq-default tab-width 4)
 
 (desktop-save-mode)
 
@@ -479,7 +477,13 @@
   :hook ((prog-mode . copilot-mode)
          (text-mode . copilot-mode))
   :config
+  ;; required to copilot mode work without warnings in all modes
+  (setq tiendil-copilot-default-indent 2)
+
   (add-to-list 'copilot--indentation-alist '(markdown-mode markdown-list-indent-width))
+  (add-to-list 'copilot--indentation-alist '(org-mode tiendil-copilot-default-indent))
+  (add-to-list 'copilot--indentation-alist '(magit-mode tiendil-copilot-default-indent))
+  (add-to-list 'copilot--indentation-alist '(text-mode tiendil-copilot-default-indent))
 
   ;; :config
   ;; this code hangs computer by starting a lot of node.js processes on emacs startup
