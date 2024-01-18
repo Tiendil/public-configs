@@ -113,6 +113,7 @@
 (put 'suspend-frame 'disabled t)
 
 (use-package doom-themes
+  :straight t
   :defines (doom-themes-enable-bold
             doom-themes-enable-italic)
   :config
@@ -124,10 +125,12 @@
   (doom-themes-visual-bell-config))
 
 (use-package minions
+  :straight t
   :config
   (minions-mode 1))
 
 (use-package doom-modeline
+  :straight t
   :config
   (setq doom-modeline-buffer-file-name-style 'buffer-name
 	doom-modeline-icon nil
@@ -153,12 +156,14 @@
   (add-hook 'before-save-hook 'py-isort-before-save))
 
 (use-package hl-line
+  :straight t
   :config
   (setq global-hl-line-sticky-flag t)
   (set-face-background hl-line-face "black")
   (global-hl-line-mode))
 
 (use-package highlight-parentheses
+  :straight t
   :config
   (global-highlight-parentheses-mode t))
 
@@ -178,6 +183,7 @@
 ;;   (dimmer-mode t))
 
 (use-package color-identifiers-mode
+  :straight t
   :defines (color-identifiers-coloring-method)
   :config
   (setq color-identifiers-coloring-method :hash
@@ -186,6 +192,7 @@
   (global-color-identifiers-mode))
 
 (use-package yascroll
+  :straight t
   :config
   (setq yascroll:delay-to-hide nil)
   (global-yascroll-bar-mode))
@@ -193,6 +200,7 @@
 ;; translate input sequences to English,
 ;; so we can use Emacs bindings while a non-default system layout is active.
 (use-package reverse-im
+  :straight t
   :custom
   (reverse-im-input-methods '("russian-computer"))
   :config
@@ -225,6 +233,7 @@
 ;; examples: http://eschulte.github.io/org-scraps/
 ;;           http://doc.norang.ca/org-mode.html
 (use-package org
+  :straight t
   :mode (("\\.org$" . org-mode))
   :defines (org-id-link-to-org-use-id
 	    org-export-coding-system
@@ -259,6 +268,7 @@
 
 
 (use-package org-superstar
+  :straight t
   :defines (org-superstar-special-todo-items)
   :config
   (setq org-superstar-special-todo-items t
@@ -267,31 +277,42 @@
   (add-hook 'org-mode-hook (lambda ()
                              (org-superstar-mode 1))))
 
-(use-package devdocs)
+(use-package devdocs
+:straight t
+)
 
-(use-package graphviz-dot-mode)
+(use-package graphviz-dot-mode
+  :straight t
+  )
+
 
 (use-package yaml-mode
+  :straight t
   ;; :mode ("\\.yaml\\'" "\\.yml\\'")
   :custom-face
   (font-lock-variable-name-face ((t (:foreground "violet")))))
 
 
 (use-package markdown-mode
+  :straight t
   :bind (("C-c o" . 'markdown-follow-link-at-point))
   :config
   (setq markdown-list-indent-width 2)
   )
 
 
-(use-package caddyfile-mode)
+(use-package caddyfile-mode
+  :straight t
+  )
 
 
 (use-package jinja2-mode
+  :straight t
   :config
   (add-to-list 'auto-mode-alist '("\\.j2\\'" . jinja2-mode)))
 
 (use-package which-key
+  :straight t
   :config
   (which-key-mode))
 
@@ -301,20 +322,24 @@
 (add-to-list 'auto-mode-alist '("\\.env\\'" . sh-mode))
 
 (use-package julia-mode
+  :straight t
    :config
    (add-to-list 'auto-mode-alist '("\\.jl\\'" . typescript-mode)))
 
 (use-package json-mode
+  :straight t
    :config
    (add-to-list 'auto-mode-alist '("\\.json\\'" . typescript-mode)))
 
 (use-package typescript-mode
+  :straight t
   :config
   (setq typescript-indent-level 2)
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode)))
 
 (use-package flycheck
+  :straight t
   :config
   (setq flycheck-highlighting-mode 'sexps
 	flycheck-check-syntax-automatically '(mode-enabled save)
@@ -327,15 +352,18 @@
   (global-flycheck-mode))
 
 (use-package smartparens
+  :straight t
   :config
   (require 'smartparens-config))
 
 
 (use-package terraform-mode
+  :straight t
   :config
   (add-to-list 'auto-mode-alist '("\\.tf\\'" . terraform-mode)))
 
 (use-package web-mode
+  :straight t
   :config
   (setq web-mode-engines-alist '(("django" . "\\.html\\'"))
 	web-mode-markup-indent-offset 2
@@ -359,13 +387,21 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode)))
 
-(use-package xonsh-mode)
+(use-package xonsh-mode
+  :straight t
+  )
 
-(use-package dockerfile-mode)
+(use-package dockerfile-mode
+  :straight t
+  )
 
-(use-package docker-compose-mode)
+(use-package docker-compose-mode
+  :straight t
+  )
 
-(use-package counsel)
+(use-package counsel
+    :straight t
+  )
 
 (defun tiendil-file-jump-from-find ()
   "Switch to `counsel-file-jump' from `counsel-find-file'."
@@ -386,6 +422,7 @@
 ;;       see https://emacs.stackexchange.com/questions/38803/prelude-ivy-how-to-select-and-open-multiple-files
 ;;       solution works for counsel-find-file, but does not work for counsel-jump-file
 (use-package swiper
+  :straight t
   :defines (counsel-find-file-ignore-regexp)
   :requires ivy
   :bind (("C-s" . 'swiper-isearch)
@@ -410,24 +447,29 @@
 ;; currentrly, should be installed manually from gnu-elpa, to upgrade default package
 ;; TODO: find a way to install automatically,
 (use-package xref
+  :straight t
   :config
   (setq xref-backend-functions (remq 'etags--xref-backend xref-backend-functions)))
 
 (use-package ivy-xref
+  :straight t
   :config
   (setq xref-show-definitions-function #'ivy-xref-show-defs))
 
 (use-package dumb-jump
+  :straight t
   ;; :hook (xref-backend-functions . dumb-jump-xref-activate)
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
   (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
 
 (use-package avy
+  :straight t
   :bind (("C-g" . 'avy-goto-line)
 	 ("C-'" . 'avy-goto-char-2)))
 
 (use-package undo-tree
+  :straight t
   :bind (("C-c u" . undo-tree-visualize))
   :config
   (setq undo-tree-visualizer-diff 1
@@ -435,10 +477,12 @@
   (global-undo-tree-mode))
 
 (use-package volatile-highlights
+  :straight t
   :config
   (volatile-highlights-mode t))
 
 (use-package company
+  :straight t
   :bind (;;("M-." . company-complete)
 	 :map company-active-map
 	 ("C-n" . 'company-select-next)
@@ -451,23 +495,30 @@
   (global-company-mode))
 
 (use-package prescient
+  :straight t
   :config
   (setq prescient-history-length 5))
 
 (use-package ivy-prescient
+  :straight t
   :config
   (ivy-prescient-mode))
 
 (use-package company-prescient
+  :straight t
   :config
   (company-prescient-mode))
 
 (use-package command-log-mode
+  :straight t
   :bind (("C-c C-l" . clm/open-command-log-buffer)))
 
-(use-package magit)
+(use-package magit
+  :straight t
+  )
 
 (use-package magit-gitflow
+  :straight t
   :hook (magit-mode . turn-on-magit-gitflow))
 
 (use-package copilot
@@ -478,13 +529,14 @@
          (text-mode . copilot-mode))
   :config
   ;; required to copilot mode work without warnings in all modes
+  (setq copilot-indent-offset-warning-disable t)
   (setq tiendil-copilot-default-indent 2)
 
-  (add-to-list 'copilot--indentation-alist '(markdown-mode markdown-list-indent-width))
-  (add-to-list 'copilot--indentation-alist '(org-mode tiendil-copilot-default-indent))
-  (add-to-list 'copilot--indentation-alist '(magit-mode tiendil-copilot-default-indent))
-  (add-to-list 'copilot--indentation-alist '(text-mode tiendil-copilot-default-indent))
-  (add-to-list 'copilot--indentation-alist '(emacs-lisp-mode tiendil-copilot-default-indent))
+  (add-to-list 'copilot-indentation-alist '(markdown-mode markdown-list-indent-width))
+  (add-to-list 'copilot-indentation-alist '(org-mode tiendil-copilot-default-indent))
+  (add-to-list 'copilot-indentation-alist '(magit-mode tiendil-copilot-default-indent))
+  (add-to-list 'copilot-indentation-alist '(text-mode tiendil-copilot-default-indent))
+  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode tiendil-copilot-default-indent))
 
   ;; :config
   ;; this code hangs computer by starting a lot of node.js processes on emacs startup
@@ -493,6 +545,7 @@
 )
 
 (use-package cheatsheet
+  :straight t
   :bind (("<f1>" . 'cheatsheet-show))
   :config
   (cheatsheet-add-group '"Autocomplete"
