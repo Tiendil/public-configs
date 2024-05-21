@@ -522,7 +522,7 @@
   :hook (magit-mode . turn-on-magit-gitflow))
 
 (use-package copilot
-  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
   :bind (("M-\[" . 'copilot-accept-completion-by-word)
          ("M-\]" . 'copilot-accept-completion))
   :hook ((prog-mode . copilot-mode)
@@ -537,6 +537,13 @@
   (add-to-list 'copilot-indentation-alist '(magit-mode tiendil-copilot-default-indent))
   (add-to-list 'copilot-indentation-alist '(text-mode tiendil-copilot-default-indent))
   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode tiendil-copilot-default-indent))
+
+  ;; Ensure the Copilot server is installed
+  ;; TODO: this command opens a separate frame with output
+  ;;       I don't want to see it
+  (unless (file-exists-p copilot-install-dir)
+    (copilot-install-server))
+
 
   ;; :config
   ;; this code hangs computer by starting a lot of node.js processes on emacs startup
