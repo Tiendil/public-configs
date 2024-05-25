@@ -549,7 +549,16 @@
   ;; this code hangs computer by starting a lot of node.js processes on emacs startup
   ;; but call of global-copilot-mode after emacs starter works ok
   ;; (global-copilot-mode))
-)
+  )
+
+(use-package treesit-auto
+  :straight t
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
+
 
 (use-package cheatsheet
   :straight t
