@@ -225,7 +225,7 @@
 
 (desktop-save-mode)
 
-(global-set-key (kbd "C-x k") 'kill-this-buffer)
+(global-set-key (kbd "C-x k") 'kill-current-buffer)
 
 
 ;; https://lucidmanager.org/productivity/ricing-org-mode/
