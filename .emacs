@@ -351,6 +351,12 @@
         flycheck-flake8rc ".flake8")
   (global-flycheck-mode))
 
+(use-package gdscript-mode
+    :straight (gdscript-mode
+               :type git
+               :host github
+               :repo "godotengine/emacs-gdscript-mode"))
+
 (use-package smartparens
   :straight t
   :config
