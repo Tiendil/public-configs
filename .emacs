@@ -355,7 +355,10 @@
     :straight (gdscript-mode
                :type git
                :host github
-               :repo "godotengine/emacs-gdscript-mode"))
+               :repo "godotengine/emacs-gdscript-mode")
+    :config
+    (setq gdscript-use-tab-indents nil)
+    )
 
 (use-package smartparens
   :straight t
