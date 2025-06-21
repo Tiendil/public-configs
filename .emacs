@@ -560,6 +560,8 @@
   ;; (global-copilot-mode))
   )
 
+;; try to run manually in case it can not find so/o files.
+;; with the problemed file opened (.json, for example)
 (use-package treesit-auto
   :straight t
   :custom
