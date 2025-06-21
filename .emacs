@@ -390,11 +390,11 @@
 		  (get-text-property (point) 'block-side)))))
   (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context)))
 
-(use-package vue-mode
-  ;; packages has not seen without this
-  :straight (:host github :repo "AdamNiederer/vue-mode" :files ("dist" "*.el"))
-  :config
-  (add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode)))
+;; (use-package vue-mode
+;;   ;; packages has not seen without this
+;;   :straight (:host github :repo "AdamNiederer/vue-mode" :files ("dist" "*.el"))
+;;   :config
+;;   (add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode)))
 
 (use-package xonsh-mode
   :straight t
@@ -560,8 +560,13 @@
   ;; (global-copilot-mode))
   )
 
+;; We install vue-ts-mode, since treesit-auto does not know how to install major modes (?)
+(use-package vue-ts-mode
+  :straight (:host github :repo "8uff3r/vue-ts-mode")
+  :mode ("\\.vue\\'" . vue-ts-mode))
+
 ;; try to run manually in case it can not find so/o files.
-;; with the problemed file opened (.json, for example)
+;; with the problemed file opened (.json, .vue, for example)
 (use-package treesit-auto
   :straight t
   :custom
