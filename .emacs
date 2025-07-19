@@ -605,6 +605,25 @@
 			'(:key "C-x right" :description "apply next window hierarhy changes")
 			'(:key "C-x +" :description "balance windows sizes")))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; UUID
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun insert-uuid4-shell ()
+  "Insert a UUID v4 by calling an external CLI tool."
+  (interactive)
+  (let ((uuid
+         ;; Example using Node’s `uuid` package:
+         (string-trim
+          (shell-command-to-string
+           "python -m uuid"))))
+    (insert uuid)))
+
+(global-set-key (kbd "C-c C-u") #'insert-uuid4-shell)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 (provide '.emacs)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
