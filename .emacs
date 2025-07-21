@@ -477,13 +477,15 @@
   :bind (("C-g" . 'avy-goto-line)
 	 ("C-'" . 'avy-goto-char-2)))
 
-(use-package undo-tree
-  :straight t
-  :bind (("C-c u" . undo-tree-visualize))
-  :config
-  (setq undo-tree-visualizer-diff 1
-	undo-tree-visualizer-timestamps 1)
-  (global-undo-tree-mode))
+;; commented 2025.07.21 since I do not use it
+;; TODO: remove if everything works ok
+;; (use-package undo-tree
+;;   :straight t
+;;   :bind (("C-c u" . undo-tree-visualize))
+;;   :config
+;;   (setq undo-tree-visualizer-diff 1
+;; 	undo-tree-visualizer-timestamps 1)
+;;   (global-undo-tree-mode))
 
 (use-package volatile-highlights
   :straight t
