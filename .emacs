@@ -578,6 +578,11 @@
   (global-treesit-auto-mode))
 
 
+(use-package lark-mode
+  :straight t
+  )
+
+
 (use-package cheatsheet
   :straight t
   :bind (("<f1>" . 'cheatsheet-show))
