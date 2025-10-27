@@ -285,7 +285,8 @@
   :straight t
   )
 
-
+;; Yaml-mode is required to have correct indentation in yaml-ts-mode
+;; Check yaml-ts-mode config below
 (use-package yaml-mode
   :straight t
   ;; :mode ("\\.yaml\\'" "\\.yml\\'")
@@ -389,12 +390,6 @@
 	 (not (or (get-text-property (point) 'part-side)
 		  (get-text-property (point) 'block-side)))))
   (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context)))
-
-;; (use-package vue-mode
-;;   ;; packages has not seen without this
-;;   :straight (:host github :repo "AdamNiederer/vue-mode" :files ("dist" "*.el"))
-;;   :config
-;;   (add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode)))
 
 (use-package xonsh-mode
   :straight t
@@ -567,6 +562,12 @@
   (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
 
+;; yaml-ts-mode configs
+(setq-default yaml-ts-mode-indent-offset 2)
+(defun tiendil-yaml-ts-indent-compat ()
+  "Use `yaml-mode`'s indentation inside `yaml-ts-mode`."
+  (setq-local indent-line-function #'yaml-indent-line))
+(add-hook 'yaml-ts-mode-hook #'tiendil-yaml-ts-indent-compat)
 
 (use-package lark-mode
   :straight t
