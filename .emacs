@@ -477,16 +477,6 @@
   :bind (("C-g" . 'avy-goto-line)
 	 ("C-'" . 'avy-goto-char-2)))
 
-;; commented 2025.07.21 since I do not use it
-;; TODO: remove if everything works ok
-;; (use-package undo-tree
-;;   :straight t
-;;   :bind (("C-c u" . undo-tree-visualize))
-;;   :config
-;;   (setq undo-tree-visualizer-diff 1
-;; 	undo-tree-visualizer-timestamps 1)
-;;   (global-undo-tree-mode))
-
 (use-package volatile-highlights
   :straight t
   :config
@@ -603,8 +593,6 @@
 			;; '(:key "C-c o" :description "jump to definition in other frame")
 			'(:key "C-c o" :description "jump to link in markdown file"))
 			;; '(:key "C-c j" :description "jump to definition in current frame"))
-  (cheatsheet-add-group '"Undo tree"
-			'(:key "C-c u" :description "open undo tree3"))
   (cheatsheet-add-group '"Commands Log"
 			'(:key "C-x C-l" :description "open commands log buffer"))
   (cheatsheet-add-group '"Windows management"
