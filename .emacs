@@ -547,10 +547,15 @@
   ;; (global-copilot-mode))
   )
 
-;; We install vue-ts-mode, since treesit-auto does not know how to install major modes (?)
-(use-package vue-ts-mode
-  :straight (:host github :repo "8uff3r/vue-ts-mode")
-  :mode ("\\.vue\\'" . vue-ts-mode))
+;; there are is no mature enough vue-ts-mode now, so we use vue-mode
+(use-package vue-mode
+  :straight t
+  :mode ("\\.vue\\'" . vue-mode)
+  :config
+  (setq vue-html-tab-width 2
+        vue-css-tab-width 2
+        vue-script-tab-width 2
+        mmm-submode-decoration-level 0))
 
 ;; try to run manually in case it can not find so/o files.
 ;; with the problemed file opened (.json, .vue, for example)
