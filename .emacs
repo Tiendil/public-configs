@@ -304,7 +304,10 @@
 
 (use-package caddyfile-mode
   :straight t
-  )
+  :hook
+  (caddyfile-mode . (lambda ()
+                      (setq-local indent-tabs-mode nil)
+                      (setq-local tab-width 2))))
 
 
 (use-package jinja2-mode
