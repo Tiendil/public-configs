@@ -577,6 +577,12 @@
   (setq-local indent-line-function #'yaml-indent-line))
 (add-hook 'yaml-ts-mode-hook #'tiendil-yaml-ts-indent-compat)
 
+(use-package typst-ts-mode
+  :straight '(:type git :host codeberg :repo "meow_king/typst-ts-mode" :branch "main")
+  :config
+  (unless (treesit-language-available-p 'typst)
+    (typst-ts-mc-install-grammar)))
+
 (use-package lark-mode
   :straight t
   )
