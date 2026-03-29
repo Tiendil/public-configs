@@ -579,6 +579,8 @@
 
 (use-package typst-ts-mode
   :straight '(:type git :host codeberg :repo "meow_king/typst-ts-mode" :branch "main")
+  :custom
+  (typst-ts-indent-offset 2)
   :config
   (unless (treesit-language-available-p 'typst)
     (typst-ts-mc-install-grammar)))
