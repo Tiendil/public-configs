@@ -568,6 +568,8 @@
   (treesit-auto-install 'prompt)
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
+  (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.cjs\\'" . js-ts-mode))
   (global-treesit-auto-mode))
 
 ;; yaml-ts-mode configs
