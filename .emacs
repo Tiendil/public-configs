@@ -547,6 +547,12 @@
   (add-to-list 'copilot-indentation-alist '(text-mode tiendil-copilot-default-indent))
   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode tiendil-copilot-default-indent))
 
+  (defun tiendil-disable-copilot-mode ()
+    (when (bound-and-true-p copilot-mode)
+      (copilot-mode -1)))
+
+  (add-hook 'magit-mode-hook #'tiendil-disable-copilot-mode)
+
   ;; Ensure the Copilot server is installed
   ;; TODO: this command opens a separate frame with output
   ;;       I don't want to see it
