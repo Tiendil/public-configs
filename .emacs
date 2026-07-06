@@ -301,6 +301,16 @@
   (setq markdown-list-indent-width 2)
   )
 
+(use-package typst-ts-mode
+  :straight (typst-ts-mode
+             :type git
+             :repo "https://codeberg.org/meow_king/typst-ts-mode.git")
+  :init
+  (add-to-list 'treesit-language-source-alist
+               '(typst "https://github.com/uben0/tree-sitter-typst"
+                       "master" "src"))
+  :mode ("\\.typ\\'" . typst-ts-mode))
+
 
 (use-package caddyfile-mode
   :straight t
