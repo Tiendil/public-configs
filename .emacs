@@ -526,10 +526,6 @@
   :straight t
   )
 
-(use-package magit-gitflow
-  :straight t
-  :hook (magit-mode . turn-on-magit-gitflow))
-
 (use-package copilot
   :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
   :bind (("M-\[" . 'copilot-accept-completion-by-word)
