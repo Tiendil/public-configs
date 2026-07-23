@@ -524,7 +524,27 @@
 
 (use-package magit
   :straight t
-  )
+
+  :config
+  ;; Temporary workaround for an Emacs redisplay bug that can leave stale
+  ;; screen contents after expanding or collapsing Magit sections.
+  ;;
+  ;; Remove this advice after upgrading Emacs or the graphics stack and
+  ;; confirming that repeated Magit section toggles no longer leave stale
+  ;; contents on screen without forcing a full frame redraw.
+  (defun tiendil-magit-redraw-after-section-toggle (&rest _)
+    "Redraw the frame after toggling a section in a Magit buffer."
+    (when (derived-mode-p 'magit-mode)
+      (redraw-frame)))
+
+  ;; Avoid installing the advice more than once when reevaluating this form.
+  (unless (advice-member-p
+           #'tiendil-magit-redraw-after-section-toggle
+           'magit-section-toggle)
+    (advice-add
+     'magit-section-toggle
+     :after
+     #'tiendil-magit-redraw-after-section-toggle)))
 
 (use-package copilot
   :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
